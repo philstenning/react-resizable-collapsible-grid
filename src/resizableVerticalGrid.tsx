@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 // @ts-ignore
-import styles from './resizableVerticalGrid.module.css'
+// import styles from './resizableVerticalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -16,7 +16,7 @@ function ResizableVerticalGrid({
   minHeight = 100,
   initialHeight = '1fr',
   collapseTop = false,
-  collapseBottom = false
+  collapseBottom = false,
 }: ResizableGrid) {
   const [panelHeight, setPanelHeight] = useState(
     collapseBottom || collapseTop ? -2 : -1
@@ -65,7 +65,7 @@ function ResizableVerticalGrid({
     // initially set to -1 on render
     if (panelHeight === -1) {
       return {
-        gridTemplateRows: `calc(50% - 2px) 5px 1fr`
+        gridTemplateRows: `calc(50% - 2px) 5px 1fr`,
       }
     }
     // if any are collapsed show single cell
@@ -99,7 +99,7 @@ function ResizableVerticalGrid({
   return (
     <div
       ref={gridRef}
-      className={styles.container}
+      className="resizable-grid"
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
@@ -123,7 +123,11 @@ type DividerProps = {
 function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
   return (
     <div
-      className={isCollapsed ? '' : styles.divider}
+      className={
+        isCollapsed
+          ? ''
+          : 'resizable-grid__divider resizable-grid__divider--vertical'
+      }
       onMouseDown={() => setIsResizing(true)}
       onTouchStart={() => setIsResizing(true)}
       onTouchEnd={() => setIsResizing(false)}

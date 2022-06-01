@@ -1,7 +1,6 @@
 import React, { useState, CSSProperties, useRef, useEffect } from 'react'
 
-// @ts-ignore
-import styles from './resizableHorizontalGrid.module.css'
+import './grid.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -14,13 +13,13 @@ function ResizableHorizontalGrid({
   children,
   collapseLeft = false,
   collapseRight = false,
-  minWidth = 200
+  minWidth = 200,
 }: ResizableGrid) {
   const [panelWidths, setPanelWidths] = useState([
     collapseLeft ? 0 : minWidth,
     collapseRight ? 0 : minWidth,
     minWidth,
-    minWidth
+    minWidth,
   ])
   const [currentPanel, setCurrentPanel] = useState(0)
   const [isResizing, setIsResizing] = useState(false)
@@ -40,7 +39,7 @@ function ResizableHorizontalGrid({
         current[0],
         current[3], // set to pre-collapsed value [3]
         current[2],
-        current[3]
+        current[3],
       ])
     }
   }, [collapseRight])
@@ -54,7 +53,7 @@ function ResizableHorizontalGrid({
         current[2], // set to pre-collapsed value [2]
         current[1],
         current[2],
-        current[3]
+        current[3],
       ])
     }
   }, [collapseLeft])
@@ -118,12 +117,12 @@ function ResizableHorizontalGrid({
     const threeColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
         collapseLeft ? '0' : '2px'
-      } 1fr ${collapseRight ? '0' : '2px'} ${panelWidths[1]}px`
+      } 1fr ${collapseRight ? '0' : '2px'} ${panelWidths[1]}px`,
     }
     const twoColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
         collapseLeft ? '0' : '2px'
-      } 1fr`
+      } 1fr`,
     }
     return (children.length >= 3 ? threeColumn : twoColumn) as CSSProperties
   }
@@ -131,7 +130,7 @@ function ResizableHorizontalGrid({
   return (
     <div
       ref={gridRef}
-      className={styles.container}
+      className="resizable-grid"
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
@@ -181,7 +180,11 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
   return (
     <div
       onMouseDown={handleMouseEvent}
-      className={isCollapsed ? '' : styles.divider}
+      className={
+        isCollapsed
+          ? ''
+          : 'resizable-grid__divider resizable-grid__divider--horizontal'
+      }
       onTouchStart={() => handleResize(true, id)}
       onTouchMove={handleTouchResize}
       onTouchEnd={() => handleResize(false, id)}

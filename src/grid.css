@@ -23,6 +23,7 @@
     left: 0;
   }
   &:hover {
+    cursor: ew-resize;
     &::before {
       animation-name: grow-horizontal;
     }
@@ -45,6 +46,8 @@
     top: 0;
   }
   &:hover {
+
+    cursor: ns-resize;
     &::before {
       animation-name: grow-vertical;
     }
@@ -72,7 +75,6 @@
   }
 
   &:hover {
-    cursor: ns-resize;
     background-color: var(--gray-6);
     opacity: 0.3;
 
