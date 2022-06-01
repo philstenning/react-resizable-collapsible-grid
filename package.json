@@ -1,0 +1,40 @@
+{
+  "name": "react-resizable-collapsible-grid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "clean" :"rimraf dist",
+    "build:ts": "tsc",
+    "build:css": "postcss   src/**/*.css --dir dist",
+    "build": " pnpm build:ts && pnpm build:css",
+    "build:clean": "pnpm clean && pnpm build:ts && pnpm build:css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "postcss": "^8.4.14",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
+    "postcss-custom-media": "^8.0.0",
+    "postcss-import": "^14.1.0",
+    "postcss-jit-props": "^1.0.7",
+    "postcss-nesting": "^10.1.7",
+    "postcss-sorting": "^7.0.1",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "cssnano": "^5.1.10",
+    "esbuild": "^0.14.42",
+    "open-props": "^1.3.16",
+    "postcss-cli": "^9.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}

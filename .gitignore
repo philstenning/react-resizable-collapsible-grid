@@ -1,0 +1,19 @@
+
+# Logs
+logs
+*.log
+
+
+node_modules
+.DS_Store
+
+# build 
+dist
+dist-ssr
+*.local
+
+# cypress
+packages/**/cypress/videos
+packages/**/cypress/screenshots
+
+
