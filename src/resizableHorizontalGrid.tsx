@@ -1,6 +1,8 @@
 import React, { useState, CSSProperties, useRef, useEffect } from 'react'
 
-import './grid.css'
+// @ts-ignore
+// import './grid.css'
+import styles from 'resizableHorizontalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -130,7 +132,8 @@ function ResizableHorizontalGrid({
   return (
     <div
       ref={gridRef}
-      className="resizable-grid"
+      className={styles.container}
+      // className="resizable-grid"
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
@@ -180,10 +183,15 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
   return (
     <div
       onMouseDown={handleMouseEvent}
+      // className={
+      //   isCollapsed
+      //     ? ''
+      //     : 'resizable-grid__divider resizable-grid__divider--horizontal'
+      // }
       className={
         isCollapsed
           ? ''
-          : 'resizable-grid__divider resizable-grid__divider--horizontal'
+          : styles.divider
       }
       onTouchStart={() => handleResize(true, id)}
       onTouchMove={handleTouchResize}
