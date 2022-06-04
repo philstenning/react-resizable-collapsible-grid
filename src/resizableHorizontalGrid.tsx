@@ -7,17 +7,24 @@ type ResizableGrid = {
   minWidth?: number
   collapseLeft?: boolean
   collapseRight?: boolean
+  initialPositions: InitialPositions
 }
 
+type InitialPositions = {
+  left: number
+  right: number
+}
+// TODO set initial position that can be read in parent container.
 function ResizableHorizontalGrid({
   children,
+  initialPositions={left:500,right:200},
   collapseLeft = false,
   collapseRight = false,
   minWidth = 200,
 }: ResizableGrid) {
   const [panelWidths, setPanelWidths] = useState([
-    collapseLeft ? 0 : minWidth,
-    collapseRight ? 0 : minWidth,
+    collapseLeft ? 0 : initialPositions.left,
+    collapseRight ? 0 : initialPositions.right,
     minWidth,
     minWidth,
   ])

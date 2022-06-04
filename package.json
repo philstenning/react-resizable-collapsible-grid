@@ -2,8 +2,9 @@
   "name": "react-resizable-collapsible-grid",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "main": "./dist/index.js",
+
   "scripts": {
     "dev": "pnpm -r dev",
     "clean": "rimraf dist",
@@ -43,3 +44,4 @@
     "react-dom": "^18.0.0"
   }
 }
+
