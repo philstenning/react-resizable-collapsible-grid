@@ -17,17 +17,18 @@ type InitialPositions = {
 // TODO set initial position that can be read in parent container.
 function ResizableHorizontalGrid({
   children,
-  initialPositions={left:500,right:200},
+  initialPositions = { left: 500, right: 200 },
   collapseLeft = false,
   collapseRight = false,
-  minWidth = 200,
+  minWidth = 50,
 }: ResizableGrid) {
   const [panelWidths, setPanelWidths] = useState([
     collapseLeft ? 0 : initialPositions.left,
     collapseRight ? 0 : initialPositions.right,
-    minWidth,
-    minWidth,
+    initialPositions.left,
+    initialPositions.right,
   ])
+
   const [currentPanel, setCurrentPanel] = useState(0)
   const [isResizing, setIsResizing] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
@@ -121,6 +122,7 @@ function ResizableHorizontalGrid({
 
   /** changes column count on how many children are passed in*/
   const gridStyle = () => {
+    console.log('grid style', panelWidths)
     const threeColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
         collapseLeft ? '0' : '2px'
