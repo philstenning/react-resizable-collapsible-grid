@@ -18,8 +18,8 @@
     "outDir": "dist",
     "removeComments": true,
     "declaration": true,
-    "sourceMap": true
-    
+    "sourceMap": true,
+    "types": ["./src/typings"]
   },
   "include": ["src/index.tsx"]
 }

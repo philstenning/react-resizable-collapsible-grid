@@ -1,8 +1,6 @@
 import React, { useState, CSSProperties, useRef, useEffect } from 'react'
 
-// @ts-ignore
-// import './grid.css'
-import styles from 'resizableHorizontalGrid.module.css'
+import styles from './resizableHorizontalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -188,11 +186,7 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
       //     ? ''
       //     : 'resizable-grid__divider resizable-grid__divider--horizontal'
       // }
-      className={
-        isCollapsed
-          ? ''
-          : styles.divider
-      }
+      className={isCollapsed ? '' : styles.divider}
       onTouchStart={() => handleResize(true, id)}
       onTouchMove={handleTouchResize}
       onTouchEnd={() => handleResize(false, id)}

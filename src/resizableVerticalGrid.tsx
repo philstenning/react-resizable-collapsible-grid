@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-// @ts-ignore
-// import styles from './resizableVerticalGrid.module.css'
+import styles from './resizableVerticalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -99,7 +98,7 @@ function ResizableVerticalGrid({
   return (
     <div
       ref={gridRef}
-      className="resizable-grid"
+      className={styles.container}
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
@@ -123,11 +122,12 @@ type DividerProps = {
 function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
   return (
     <div
-      className={
-        isCollapsed
-          ? ''
-          : 'resizable-grid__divider resizable-grid__divider--vertical'
-      }
+      className={isCollapsed ? '' : styles.divider}
+      // className={
+      //   isCollapsed
+      //     ? ''
+      //     : 'resizable-grid__divider resizable-grid__divider--vertical'
+      // }
       onMouseDown={() => setIsResizing(true)}
       onTouchStart={() => setIsResizing(true)}
       onTouchEnd={() => setIsResizing(false)}

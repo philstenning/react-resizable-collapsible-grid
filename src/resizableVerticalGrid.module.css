@@ -13,53 +13,55 @@
 
 .divider {
   position: relative;
-  background-color: var(--green-3);
+  background-color: var(--resizable-grid-track-color);
   width: 100%;
   height: 2px;
-  opacity: 0.1;
-  transition: all 0.2s ease-in-out;
 
-  &:hover {
-    cursor: ns-resize;
-    background-color: var(--gray-6);
-    opacity: .3;
-  }
-}
-
-/*  keeps the mouse hover in focus
-   and provides a larger hit box
-*/
-.divider:hover::after {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
-  top: -27px;
-}
-
-.divider::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 2px;
-  background-color: var(--green-3);
-  top: 0;
+  opacity: var(--resizable-grid-track-opacity);
   transition: all 0.3s ease-in-out;
 
   &:hover {
-      animation-name: grow;
-      animation-duration: 0.3s;
-      animation-direction: normal;
-      animation-fill-mode: forwards;
-      animation-delay: .5s;
-      
+    cursor: ns-resize;
+    background-color: transparent;
+    opacity: var(--resizable-grid-track-opacity-hover);
+  }
+
+  /*  keeps the mouse hover in focus
+   and provides a larger hit box
+*/
+  &:hover::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    opacity: var(--resizable-grid-track-opacity-hover);
+    top: -27px;
+    left: 0;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px;
+    left: 0;
+    background-color: var(--resizable-grid-track-color);
+    top: 0;
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover::before {
+    background-color: var(--resizable-grid-track-color-hover);
+    animation-name: grow-v;
+    animation-duration: 0.3s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
   }
 }
 
-@keyframes grow {
+@keyframes grow-v {
   to {
-    height: 4px;
-    top: -2px;
+    transform: scaleY(var(--resizable-grid-final-scale));
   }
 }

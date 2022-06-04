@@ -11,7 +11,9 @@
     "build:css": "postcss   src/**/*.css --dir dist",
     "build": " pnpm build:ts && pnpm build:css",
     "build:clean": "pnpm clean && pnpm build:ts && pnpm build:css",
-    "watch:css": "postcss  src/**/*.css --dir dist -w"
+    "watch:css": "postcss  src/**/*.css --dir dist -w",
+    "watch:ts:": "tsc -w",
+    "watch": "concurrently \"tsc -w\" \"postcss  src/**/*.css --dir dist -w\"  "
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "concurrently": "^7.2.1",
     "cssnano": "^5.1.10",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
@@ -30,6 +33,7 @@
     "postcss-sorting": "^7.0.1",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
+    "sass": "^1.52.2",
     "typescript": "^4.7.2"
   },
   "dependencies": {
@@ -39,4 +43,3 @@
     "react-dom": "^18.0.0"
   }
 }
-

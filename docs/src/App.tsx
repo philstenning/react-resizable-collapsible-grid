@@ -4,6 +4,7 @@ import {
 } from 'react-resizable-collapsible-grid'
 // import Grid from 'react-resizable-collapsible-grid/src/grid'
 import './App.css'
+import 'react-resizable-collapsible-grid/dist/resizableGrid.css'
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
           harum perferendis placeat dicta id, quo nulla iure sequi explicabo
           laudantium.
         </div>
+        {/* <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
+          harum perferendis placeat dicta id, quo nulla iure sequi explicabo
+          laudantium.
+        </div> */}
         <ResizableVerticalGrid>
           <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, eius

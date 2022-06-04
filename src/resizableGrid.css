@@ -1,0 +1,12 @@
+body {
+ --resizable-grid-final-scale: 1.8;
+  --resizable-grid-track-color: var(--gray-8);
+  --resizable-grid-track-color-hover: var(--gray-7);
+  --resizable-grid-track-opacity: 0.2;
+  --resizable-grid-track-opacity-hover: .5;
+}
+
+.resizable-grid__content {
+  overflow-y: auto;
+  padding: 1rem;
+}
