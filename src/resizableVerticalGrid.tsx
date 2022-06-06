@@ -7,13 +7,13 @@ type ResizableGrid = {
   minHeight?: number
   collapseTop?: boolean
   collapseBottom?: boolean
-  initialHeight?: string
+  initialHeight?: string | number
 }
 
 function ResizableVerticalGrid({
   children,
   minHeight = 100,
-  initialHeight = '1fr',
+  initialHeight = '50%',
   collapseTop = false,
   collapseBottom = false,
 }: ResizableGrid) {
@@ -63,8 +63,10 @@ function ResizableVerticalGrid({
   const gridStyle = () => {
     // initially set to -1 on render
     if (panelHeight === -1) {
+      const height = typeof initialHeight==='number'
+      console.log(height)
       return {
-        gridTemplateRows: `calc(50% - 2px) 5px 1fr`,
+        gridTemplateRows: `calc(${initialHeight}${height?'px':'- 2px'} ) 5px 1fr`,
       }
     }
     // if any are collapsed show single cell
