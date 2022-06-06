@@ -9,12 +9,7 @@ type ResizableGrid = {
   collapseLeft?: boolean
   collapseRight?: boolean
   initialWidths?: HorizontalGridWidths
-  getCurrentWidths?: ({ gridId, left, right }: HorizontalGridState) => void
-}
-export type HorizontalGridState = {
-  gridId: number | string
-  left: number
-  right: number
+  getCurrentState?: ({ gridId, left, right }: HorizontalGridState) => void
 }
 
 export type HorizontalGridWidths = {
@@ -22,10 +17,24 @@ export type HorizontalGridWidths = {
   right: number
 }
 
+
+
+export type HorizontalGridState = {
+  __typeName: 'HorizontalGrid' | 'VerticalGrid'
+  gridId: number | string
+  left: HorizontalGridSideState
+  right: HorizontalGridSideState
+}
+
+export type HorizontalGridSideState = {
+  isCollapsed: boolean
+  preCollapsedSize: number
+  currentSize: number
+}
 // TODO set initial position that can be read in parent container.
 function ResizableHorizontalGrid({
   children,
-  getCurrentWidths,
+  getCurrentState,
   initialWidths = { left: 500, right: 200 },
   collapseLeft = false,
   collapseRight = false,
@@ -43,9 +52,32 @@ function ResizableHorizontalGrid({
   const [isResizing, setIsResizing] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
 
+  const updateParentContainer = () => {
+    // return state to parent container
+    if (getCurrentState) {
+      getCurrentState({
+        __typeName:'HorizontalGrid',
+        gridId,
+        left: {
+          currentSize: panelWidths[0],
+          isCollapsed: collapseLeft,
+          preCollapsedSize: panelWidths[2],
+        },
+        right: {
+          currentSize: panelWidths[1],
+          isCollapsed: collapseLeft,
+          preCollapsedSize: panelWidths[3],
+        },
+      })
+    }
+  }
+
   const handleResize = (isResizing: boolean, currentPanel: number) => {
     setCurrentPanel(currentPanel)
     setIsResizing(isResizing)
+    if (!isResizing) {
+      updateParentContainer()
+    }
   }
 
   useEffect(() => {
@@ -113,12 +145,10 @@ function ResizableHorizontalGrid({
 
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isResizing) {
+      e.stopPropagation()
       setIsResizing(false)
     }
-    // return state to parent container
-    if (getCurrentWidths) {
-      getCurrentWidths({ gridId, left: panelWidths[0], right: panelWidths[1] })
-    }
+    updateParentContainer()
   }
 
   /**  If the mouse cursor goes outside of the grid

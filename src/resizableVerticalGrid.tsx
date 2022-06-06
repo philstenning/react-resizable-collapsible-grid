@@ -4,10 +4,25 @@ import styles from './resizableVerticalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
+  gridId?: number | string
   minHeight?: number
   collapseTop?: boolean
   collapseBottom?: boolean
   initialHeight?: string | number
+  getCurrentState?: ({ gridId, height }: VerticalGridState) => void
+}
+
+export type VerticalGridHeight = {
+  height: number
+}
+
+export type VerticalGridState = {
+  __typeName: 'HorizontalGrid' | 'VerticalGrid'
+  gridId: number | string
+  height: number
+  topIsCollapsed: boolean
+  bottomIsCollapsed: boolean
+  preCollapsedHeight: number
 }
 
 function ResizableVerticalGrid({
@@ -16,14 +31,31 @@ function ResizableVerticalGrid({
   initialHeight = '50%',
   collapseTop = false,
   collapseBottom = false,
+  gridId = 0,
+  getCurrentState,
 }: ResizableGrid) {
   const [panelHeight, setPanelHeight] = useState(
     collapseBottom || collapseTop ? -2 : -1
   )
+
+  // used to restore height after a collapse section is restored
   const [storedPanelHeight, setStoredHeight] = useState(0)
 
   const [isResizing, setIsResizing] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
+
+  const updateParentContainer = () => {
+    if (getCurrentState) {
+      getCurrentState({
+        __typeName: 'VerticalGrid',
+        gridId,
+        height: panelHeight,
+        topIsCollapsed: collapseTop,
+        bottomIsCollapsed: collapseBottom,
+        preCollapsedHeight: storedPanelHeight,
+      })
+    }
+  }
 
   /** Called on this grid for resizing */
   const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -46,8 +78,10 @@ function ResizableVerticalGrid({
 
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isResizing) {
+      e.stopPropagation()
       setIsResizing(false)
     }
+    updateParentContainer()
   }
 
   const handleLeave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -63,10 +97,11 @@ function ResizableVerticalGrid({
   const gridStyle = () => {
     // initially set to -1 on render
     if (panelHeight === -1) {
-      const height = typeof initialHeight==='number'
-      console.log(height)
+      const isNumber = typeof initialHeight === 'number'
       return {
-        gridTemplateRows: `calc(${initialHeight}${height?'px':'- 2px'} ) 5px 1fr`,
+        gridTemplateRows: `calc(${initialHeight}${
+          isNumber ? 'px' : '- 2px'
+        } ) 5px 1fr`,
       }
     }
     // if any are collapsed show single cell
@@ -84,7 +119,11 @@ function ResizableVerticalGrid({
     // we can set storedPanelHeight to 50% of gridHeight
     if (panelHeight < 0) {
       setStoredHeight(gridHeight / 2)
+    } else {
+      // won't run on initial render
+      updateParentContainer()
     }
+
     if (collapseBottom || collapseTop) {
       // storedPanelHeight initial value is 0
       if (storedPanelHeight === 0) {
@@ -97,6 +136,11 @@ function ResizableVerticalGrid({
     }
   }, [collapseBottom, collapseTop])
 
+  const handleTouchFinish = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsResizing(false)
+    updateParentContainer()
+  }
+
   return (
     <div
       ref={gridRef}
@@ -108,7 +152,11 @@ function ResizableVerticalGrid({
     >
       {children.length > 0 && !collapseTop && children[0]}
       {!collapseTop && !collapseBottom && (
-        <Divider setIsResizing={setIsResizing} resize={resize} />
+        <Divider
+          setIsResizing={setIsResizing}
+          resize={resize}
+          resizeFinished={handleTouchFinish}
+        />
       )}
       {!collapseBottom && children.length > 1 && children[1]}
     </div>
@@ -119,9 +167,16 @@ type DividerProps = {
   setIsResizing: React.Dispatch<React.SetStateAction<boolean>>
   isCollapsed?: boolean
   resize: (mouseY: number) => void
+  resizeFinished: (e: React.TouchEvent<HTMLDivElement>) => void
+  // resizeFinished: (e: React.TouchEvent<HTMLDivElement>) => void
 }
 
-function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
+function Divider({
+  setIsResizing,
+  isCollapsed = false,
+  resize,
+  resizeFinished,
+}: DividerProps) {
   return (
     <div
       className={isCollapsed ? '' : styles.divider}
@@ -132,7 +187,8 @@ function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
       // }
       onMouseDown={() => setIsResizing(true)}
       onTouchStart={() => setIsResizing(true)}
-      onTouchEnd={() => setIsResizing(false)}
+      onTouchEnd={resizeFinished}
+      // onTouchEnd={() => setIsResizing(false)}
       onTouchMove={(e) => resize(e.nativeEvent.touches[0].clientY)}
     ></div>
   )
