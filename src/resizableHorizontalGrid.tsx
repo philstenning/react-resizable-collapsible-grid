@@ -4,29 +4,39 @@ import styles from './resizableHorizontalGrid.module.css'
 
 type ResizableGrid = {
   children: React.ReactNode[]
+  gridId?: number | string
   minWidth?: number
   collapseLeft?: boolean
   collapseRight?: boolean
-  initialPositions: InitialPositions
+  initialWidths?: HorizontalGridWidths
+  getCurrentWidths?: ({ gridId, left, right }: HorizontalGridState) => void
 }
-
-type InitialPositions = {
+export type HorizontalGridState = {
+  gridId: number | string
   left: number
   right: number
 }
+
+export type HorizontalGridWidths = {
+  left: number
+  right: number
+}
+
 // TODO set initial position that can be read in parent container.
 function ResizableHorizontalGrid({
   children,
-  initialPositions = { left: 500, right: 200 },
+  getCurrentWidths,
+  initialWidths = { left: 500, right: 200 },
   collapseLeft = false,
   collapseRight = false,
   minWidth = 50,
+  gridId = 0,
 }: ResizableGrid) {
   const [panelWidths, setPanelWidths] = useState([
-    collapseLeft ? 0 : initialPositions.left,
-    collapseRight ? 0 : initialPositions.right,
-    initialPositions.left,
-    initialPositions.right,
+    collapseLeft ? 0 : initialWidths.left,
+    collapseRight ? 0 : initialWidths.right,
+    initialWidths.left,
+    initialWidths.right,
   ])
 
   const [currentPanel, setCurrentPanel] = useState(0)
@@ -105,6 +115,10 @@ function ResizableHorizontalGrid({
     if (isResizing) {
       setIsResizing(false)
     }
+    // return state to parent container
+    if (getCurrentWidths) {
+      getCurrentWidths({ gridId, left: panelWidths[0], right: panelWidths[1] })
+    }
   }
 
   /**  If the mouse cursor goes outside of the grid
@@ -122,7 +136,7 @@ function ResizableHorizontalGrid({
 
   /** changes column count on how many children are passed in*/
   const gridStyle = () => {
-    console.log('grid style', panelWidths)
+    // console.log('grid style', panelWidths)
     const threeColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
         collapseLeft ? '0' : '2px'
