@@ -13,29 +13,28 @@ type ResizableGrid = {
 }
 
 export type HorizontalGridWidths = {
-  left: number
-  right: number
+  left: number | string
+  right: number | string
 }
 
-
-
 export type HorizontalGridState = {
-  __typeName: 'HorizontalGrid' | 'VerticalGrid'
+  __typeName: 'HorizontalGrid' 
   gridId: number | string
   left: HorizontalGridSideState
   right: HorizontalGridSideState
 }
 
 export type HorizontalGridSideState = {
-  isCollapsed: boolean
-  preCollapsedSize: number
-  currentSize: number
+  isCollapsed: boolean 
+  preCollapsedSize: number| string
+  currentSize: number | string
 }
-// TODO set initial position that can be read in parent container.
+
+
 function ResizableHorizontalGrid({
   children,
   getCurrentState,
-  initialWidths = { left: 500, right: 200 },
+  initialWidths = { left: '20%', right: '20vw' },
   collapseLeft = false,
   collapseRight = false,
   minWidth = 50,
@@ -56,7 +55,7 @@ function ResizableHorizontalGrid({
     // return state to parent container
     if (getCurrentState) {
       getCurrentState({
-        __typeName:'HorizontalGrid',
+        __typeName: 'HorizontalGrid',
         gridId,
         left: {
           currentSize: panelWidths[0],
@@ -120,6 +119,8 @@ function ResizableHorizontalGrid({
     if (!isResizing) return
     const gridWidth = gridRef.current?.clientWidth ?? 0
     const leftOffset = gridRef.current?.offsetLeft ?? 0
+    // the right hand side of the grid relative to the 
+    // position of grid in the viewport
     const maxRight = gridWidth + leftOffset
 
     // Left hand panel

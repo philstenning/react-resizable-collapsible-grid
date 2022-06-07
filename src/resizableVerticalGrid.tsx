@@ -100,7 +100,7 @@ function ResizableVerticalGrid({
       const isNumber = typeof initialHeight === 'number'
       return {
         gridTemplateRows: `calc(${initialHeight}${
-          isNumber ? 'px' : '- 2px'
+          isNumber ? 'px' : ' - 2px'
         } ) 5px 1fr`,
       }
     }
