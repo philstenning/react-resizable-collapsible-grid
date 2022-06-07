@@ -4,75 +4,13 @@ import {
   ResizableVerticalGrid,
   GridState,
   isHorizontalGrid,
-  HorizontalGridState,
-  VerticalGridState,
+  useResizeGridLocalStorage,
 } from 'react-resizable-collapsible-grid'
 import './App.css'
 import 'react-resizable-collapsible-grid/dist/resizableGrid.css'
 
-type UseStorage = [
-  onReload: (gridId: number | string) => GridState,
-  setResizableGrid: (gridState: GridState) => void
-]
-
-function useResizeGridLocalStorage() {
-  const [state, setState] = useState<GridState[]>(
-    JSON.parse(localStorage.getItem('gridState') ?? '[]') as GridState[]
-  )
-
-  const setResizeState = (gridState: GridState) => {
-    const existingState = state.filter((s) => s.gridId !== gridState.gridId)
-    const newState = [...existingState, gridState]
-    setState(newState)
-    localStorage.setItem('gridState', JSON.stringify(newState))
-  }
-
-  const resizableGrid = (gridId: number | string) => {
-    const result = state.filter((s) => s.gridId === gridId)[0] ?? []
-    return result
-  }
-
-  const getVerticalGrid = (gridId: number | string) => {
-    return (state.filter(
-      (s) => s.__typeName === 'VerticalGrid' && s.gridId === gridId
-    )[0] ?? {}) as VerticalGridState
-  }
-  const getVerticalGridHeight = (
-    gridId: number | string,
-    defaultHeight: number | string = '50%'
-  ) => {
-    const result = state.filter(
-      (s) => s.__typeName === 'VerticalGrid' && s.gridId === gridId
-    ) as VerticalGridState[]
-    if (!result.length) {
-      return defaultHeight
-    }
-    return result[0].height
-  }
-  const getHorizontalGridWidths = (
-    gridId: number | string,
-    defaultLeft: number | string = '25vw',
-    defaultRight: number | string = '25vw'
-  ) => {
-    const result = state.filter(
-      (s) => s.__typeName === 'HorizontalGrid' && s.gridId === gridId
-    ) as HorizontalGridState[]
-    if (!result.length) {
-      return { left: defaultLeft, right: defaultRight }
-    }
-    const grid = result[0]
-    return { left: grid.left.currentSize, right: grid.right.currentSize }
-  }
-
-  return {
-    getVerticalGrid,
-    getVerticalGridHeight,
-    getHorizontalGridWidths,
-    setResizeState,
-  }
-}
-
 function App() {
+  const [isCollapsed, setIsCollapsed] = useState([false, false, false, false])
   const { getVerticalGridHeight, getHorizontalGridWidths, setResizeState } =
     useResizeGridLocalStorage()
 
@@ -82,17 +20,43 @@ function App() {
     } else {
       // Resizable Vertical Grid
     }
-
+    // save to localStorage
     setResizeState(gridState)
   }
 
   return (
     <div className="App">
+      <header className="header">
+        <div className="button-group">
+          <button
+            onClick={() => setIsCollapsed((c) => [!c[0], c[1], c[2], c[3]])}
+          >
+            left
+          </button>
+          <button
+            onClick={() => setIsCollapsed((c) => [c[0], !c[1], c[2], c[3]])}
+          >
+            right
+          </button>
+          <button
+            onClick={() => setIsCollapsed((c) => [c[0], c[1], !c[2], c[3]])}
+          >
+            top
+          </button>
+          <button
+            onClick={() => setIsCollapsed((c) => [c[0], c[1], c[2], !c[3]])}
+          >
+            bottom
+          </button>
+        </div>
+      </header>
       <ResizableHorizontalGrid
         // initialWidths={{ left: gridH.__typeName==='HorizontalGrid'?gridH.left.currentSize:300, right: 200 }}
-        initialWidths={getHorizontalGridWidths(5, 300, 200)}
+        initialWidths={getHorizontalGridWidths(5, '15vw', 200)}
         getCurrentState={getGridState}
         gridId={5}
+        collapseLeft={isCollapsed[0]}
+        collapseRight={isCollapsed[1]}
       >
         <div>
           Lorem ipsum dolor sit amet, {getHorizontalGridWidths(5).left}{' '}
@@ -103,17 +67,10 @@ function App() {
           gridId={6}
           initialHeight={getVerticalGridHeight(6)}
           getCurrentState={getGridState}
+          collapseTop={isCollapsed[2]}
+          collapseBottom={isCollapsed[3]}
         >
-          <div>
-            {' '}
-            {/* <h1>Hello</h1> */}
-            <button
-            // onClick={() => setHorizontalGridSize({ left: 300, right: 400 })}
-            >
-              click
-            </button>
-            {/* {JSON.stringify(initialHorizontalGridWidths)}  */}
-            Lorem ipsum {getVerticalGridHeight(6).toString()} dolor sit amet
+          <div> dolor sit amet
             consectetur adipisicing elit. Quae, eius iste. Ullam quae cumque
             explicabo recusandae praesentium magnam harum nam.
           </div>
@@ -124,7 +81,7 @@ function App() {
           </div>
         </ResizableVerticalGrid>
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
+         ipsum dolor sit amet, consectetur adipisicing elit. Dolores
           harum perferendis placeat dicta id, quo nulla iure sequi explicabo
           laudantium.
         </div>

@@ -8,17 +8,20 @@ import type {
   VerticalGridState,
 } from './resizableVerticalGrid'
 
+import type { GridState } from './utils'
+
 import ResizableHorizontalGrid from './resizableHorizontalGrid'
 import ResizableVerticalGrid from './resizableVerticalGrid'
 import { isHorizontalGrid, isVerticalGrid } from './utils'
 
-import type { GridState } from './utils'
+import useResizeGridLocalStorage from './useResizeGridLocalStorage'
 
 export {
   ResizableHorizontalGrid,
   ResizableVerticalGrid,
   isHorizontalGrid,
   isVerticalGrid,
+  useResizeGridLocalStorage,
 }
 
 export type {
@@ -26,5 +29,5 @@ export type {
   HorizontalGridState,
   VerticalGridHeight,
   VerticalGridState,
-  GridState
+  GridState,
 }

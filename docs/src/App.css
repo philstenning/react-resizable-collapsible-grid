@@ -1,8 +1,74 @@
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
   height: 100vh;
   width: 100%;
-  border: solid 2px #999;
+  /* border: solid 2px #999; */
   background-color: var(--gray-9);
   color: var(--grey-2);
 }
+
+.header {
+  position: fixed;
+  width: 100%;
+  /* border: solid; */
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.button-group {
+  pointer-events: initial;
+  position: relative;
+  z-index: 10;
+  width: fit-content;
+  margin: auto;
+  /* left: calc(50vw); */
+
+  padding: 0.5rem 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--gray-5);
+  border-radius: 0 0 10px 10px;
+  /* transform: translateY(-3.2rem); */
+  transition: transform 0.3s ease-in-out;
+}
+
+.button-group:hover {
+  transform: translateY(0);
+}
+
+/* .button-group::after {
+  position: absolute;
+  z-index: 1;
+  content: '';
+  width: 3rem;
+  height: .3rem;
+  aspect-ratio: 1 / 1;
+  background-color: var(--gray-5);
+  bottom: -2rem;
+  transform: rotate(-25deg);
+  /* border-radius: 0 0 25% 25%; */
+  /* transition: all 0.3s ease-in-out; */
+  
+/* }
+.button-group:hover::after {
+  transform: translateY(-2rem) rotate(-25deg);
+  cursor: pointer; */
+  /* background-color: transparent; */
+ 
+
+.button-group > * {
+  z-index: 5;
+  text-transform: capitalize;
+  border-radius: 5px;
+}
+
+.button-group > *:hover {
+  background-color: var(--gray-8);
+}
+

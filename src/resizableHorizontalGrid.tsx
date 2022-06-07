@@ -18,18 +18,17 @@ export type HorizontalGridWidths = {
 }
 
 export type HorizontalGridState = {
-  __typeName: 'HorizontalGrid' 
+  __typeName: 'HorizontalGrid'
   gridId: number | string
   left: HorizontalGridSideState
   right: HorizontalGridSideState
 }
 
 export type HorizontalGridSideState = {
-  isCollapsed: boolean 
-  preCollapsedSize: number| string
+  isCollapsed: boolean
+  // preCollapsedSize: number | string
   currentSize: number | string
 }
-
 
 function ResizableHorizontalGrid({
   children,
@@ -40,12 +39,15 @@ function ResizableHorizontalGrid({
   minWidth = 50,
   gridId = 0,
 }: ResizableGrid) {
-  const [panelWidths, setPanelWidths] = useState([
-    collapseLeft ? 0 : initialWidths.left,
-    collapseRight ? 0 : initialWidths.right,
-    initialWidths.left,
-    initialWidths.right,
-  ])
+  const [panelWidths1, setPanelWidths1] = useState({
+    left: initialWidths.left,
+    right: initialWidths.right,
+  })
+
+  // left:typeof initialWidths.left==='number'?initialWidths.left:-1,
+  // right:typeof initialWidths.right==='number'?initialWidths.right:-1
+  const [leftIsCollapsed, setLeftIsCollapsed] = useState(collapseLeft)
+  const [rightIsCollapsed, setRightIsCollapsed] = useState(collapseRight)
 
   const [currentPanel, setCurrentPanel] = useState(0)
   const [isResizing, setIsResizing] = useState(false)
@@ -58,14 +60,12 @@ function ResizableHorizontalGrid({
         __typeName: 'HorizontalGrid',
         gridId,
         left: {
-          currentSize: panelWidths[0],
+          currentSize: panelWidths1.left,
           isCollapsed: collapseLeft,
-          preCollapsedSize: panelWidths[2],
         },
         right: {
-          currentSize: panelWidths[1],
+          currentSize: panelWidths1.right,
           isCollapsed: collapseLeft,
-          preCollapsedSize: panelWidths[3],
         },
       })
     }
@@ -80,37 +80,17 @@ function ResizableHorizontalGrid({
   }
 
   useEffect(() => {
-    if (collapseRight) {
-      // save current to [3]
-      setPanelWidths((current) => [current[0], 0, current[2], current[1]])
-    } else {
-      setPanelWidths((current) => [
-        current[0],
-        current[3], // set to pre-collapsed value [3]
-        current[2],
-        current[3],
-      ])
-    }
+    console.log({ collapseRight })
+    setRightIsCollapsed(collapseRight)
   }, [collapseRight])
 
   useEffect(() => {
-    if (collapseLeft) {
-      // save current to [2]
-      setPanelWidths((current) => [0, current[1], current[0], current[3]])
-    } else {
-      setPanelWidths((current) => [
-        current[2], // set to pre-collapsed value [2]
-        current[1],
-        current[2],
-        current[3],
-      ])
-    }
+    console.log({ collapseLeft })
+    setLeftIsCollapsed(collapseLeft)
   }, [collapseLeft])
 
   /** Called on this grid for resizing */
   const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // e.stopPropagation()
-    // e.preventDefault()
     resize(e.clientX)
   }
 
@@ -119,28 +99,35 @@ function ResizableHorizontalGrid({
     if (!isResizing) return
     const gridWidth = gridRef.current?.clientWidth ?? 0
     const leftOffset = gridRef.current?.offsetLeft ?? 0
-    // the right hand side of the grid relative to the 
+    // the right hand side of the grid relative to the
     // position of grid in the viewport
     const maxRight = gridWidth + leftOffset
 
     // Left hand panel
     if (currentPanel === 0) {
       let newVal = mousePosition - leftOffset
+
+      // the value might be a string, if it is we can't convert to a number, so set to the
+      // minimum width value. As soon as the mouse/touch has moved it will be a number.
+      const maybeInitialString =
+        typeof panelWidths1.right === 'number' ? panelWidths1.right : minWidth
       // if it is collapsed set to zero
       if (collapseLeft) newVal = 0
 
       if (
         mousePosition >= leftOffset + minWidth &&
-        mousePosition <= maxRight - (minWidth + panelWidths[1])
+        mousePosition <= maxRight - (minWidth + maybeInitialString)
       ) {
-        setPanelWidths((current) => [newVal, current[1], newVal, current[3]])
+        // setPanelWidths((current) => [newVal, current[1], newVal, current[3]])
+        setPanelWidths1((current) => ({ ...current, left: newVal }))
       }
     } else {
       // right hand panel
       let newVal = gridWidth - (mousePosition - leftOffset)
       if (newVal < minWidth) newVal = minWidth
       if (collapseRight) newVal = 0
-      setPanelWidths((current) => [current[0], newVal, current[2], newVal])
+      // setPanelWidths((current) => [current[0], newVal, current[2], newVal])
+      setPanelWidths1((current) => ({ ...current, right: newVal }))
     }
   }
 
@@ -165,50 +152,66 @@ function ResizableHorizontalGrid({
     }
   }
 
+  const columnWidthAsString = (
+    cssWidth: number | string,
+    isCollapsed: boolean
+  ) => {
+    if (typeof cssWidth === 'number') {
+      return `${isCollapsed ? '' : cssWidth + 'px'}`
+    }
+    return `${isCollapsed ? '' : cssWidth}`
+  }
   /** changes column count on how many children are passed in*/
   const gridStyle = () => {
-    // console.log('grid style', panelWidths)
-    const threeColumn = {
-      gridTemplateColumns: `${panelWidths[0]}px ${
-        collapseLeft ? '0' : '2px'
-      } 1fr ${collapseRight ? '0' : '2px'} ${panelWidths[1]}px`,
+    if (children.length > 2) {
+      return {
+        gridTemplateColumns: `${columnWidthAsString(
+          panelWidths1.left,
+          leftIsCollapsed
+        )} ${leftIsCollapsed ? '' : '2px'} 1fr ${
+          rightIsCollapsed ? '' : '2px'
+        } ${columnWidthAsString(panelWidths1.right, rightIsCollapsed)}`,
+      } as CSSProperties
     }
-    const twoColumn = {
-      gridTemplateColumns: `${panelWidths[0]}px ${
-        collapseLeft ? '0' : '2px'
-      } 1fr`,
-    }
-    return (children.length >= 3 ? threeColumn : twoColumn) as CSSProperties
+    // Two columns  
+    return( {
+      gridTemplateColumns: `${columnWidthAsString(
+        panelWidths1.left,
+        leftIsCollapsed
+      )} ${leftIsCollapsed ? '' : '2px'} 1fr`,
+    }) as CSSProperties
+
   }
 
   return (
     <div
       ref={gridRef}
       className={styles.container}
-      // className="resizable-grid"
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
       onMouseLeave={handleLeave}
     >
-      {children[0]}
-      <Divider
-        handleResize={handleResize}
-        id={0}
-        isCollapsed={collapseLeft}
-        resize={resize}
-      />
-      {children.length >= 2 && children[1]}
-
-      {children.length >= 3 && (
+      {!leftIsCollapsed && children[0]}
+      {!leftIsCollapsed && (
         <Divider
           handleResize={handleResize}
-          isCollapsed={collapseRight}
+          id={0}
+          isCollapsed={leftIsCollapsed}
+          resize={resize}
+        />
+      )}
+      {children.length >= 2 && children[1]}
+
+      {!rightIsCollapsed && children.length >= 3 && (
+        <Divider
+          handleResize={handleResize}
+          isCollapsed={rightIsCollapsed}
           id={1}
           resize={resize}
         />
       )}
-      {children.length >= 3 && children[2]}
+      {!rightIsCollapsed && children.length >= 3 && children[2]}
     </div>
   )
 }
@@ -235,11 +238,6 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
   return (
     <div
       onMouseDown={handleMouseEvent}
-      // className={
-      //   isCollapsed
-      //     ? ''
-      //     : 'resizable-grid__divider resizable-grid__divider--horizontal'
-      // }
       className={isCollapsed ? '' : styles.divider}
       onTouchStart={() => handleResize(true, id)}
       onTouchMove={handleTouchResize}
