@@ -173,14 +173,13 @@ function ResizableHorizontalGrid({
         } ${columnWidthAsString(panelWidths1.right, rightIsCollapsed)}`,
       } as CSSProperties
     }
-    // Two columns  
-    return( {
+    // Two columns
+    return {
       gridTemplateColumns: `${columnWidthAsString(
         panelWidths1.left,
         leftIsCollapsed
       )} ${leftIsCollapsed ? '' : '2px'} 1fr`,
-    }) as CSSProperties
-
+    } as CSSProperties
   }
 
   return (

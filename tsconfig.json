@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "react-jsxdev",
+    "jsx": "react",
     "outDir": "dist",
     "removeComments": true,
     "declaration": true,
