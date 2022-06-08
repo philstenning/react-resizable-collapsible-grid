@@ -20,11 +20,15 @@ Included is a hook to save the current positions of the handles to localStorage,
 
 <hr/>
 
-- How to use
-- ResizableHorizontalGrid
-- ResizableVerticalGrid
-- Styling with css
-- Hook
+- [React Resizable Collapsible Grid](#react-resizable-collapsible-grid)
+  - [How to Use](#how-to-use)
+  - [ResizableHorizontalGrid](#resizablehorizontalgrid)
+    - [Options](#options)
+  - [ResizableVerticalGrid](#resizableverticalgrid)
+    - [options:](#options-1)
+  - [Styling with css](#styling-with-css)
+  - [Hook](#hook)
+  - [Nested example:](#nested-example)
 
 <hr/>
 
@@ -187,7 +191,7 @@ body {
 
 The included hook just saves and retrieves component state to localStorage to see the code have a look in the [example using hooks](https://github.com/philstenning/react-resizable-collapsible-grid/blob/main/docs/src/App.tsx)
 
-### Nested example:
+## Nested example:
 
 ```tsx
 import {
