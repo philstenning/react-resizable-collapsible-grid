@@ -9,8 +9,18 @@ import {
 import './App.css'
 import 'react-resizable-collapsible-grid/dist/resizableGrid.css'
 
+const initialButtonState = {
+  left: false,
+  right: false,
+  top: false,
+  bottom: false,
+}
+type CollapsedGridButtonState = typeof initialButtonState
+
 function App() {
-  const [isCollapsed, setIsCollapsed] = useState([false, false, false, false])
+  const [isCollapsed, setIsCollapsed] =
+    useState<CollapsedGridButtonState>(initialButtonState)
+
   const { getVerticalGridHeight, getHorizontalGridWidths, setResizeState } =
     useResizeGridLocalStorage()
 
@@ -28,90 +38,78 @@ function App() {
     <div className="App">
       <header className="header">
         <div className="button-group">
-          <button
-            onClick={() => setIsCollapsed((c) => [!c[0], c[1], c[2], c[3]])}
-          >
-            left
-          </button>
-          <button
-            onClick={() => setIsCollapsed((c) => [c[0], !c[1], c[2], c[3]])}
-          >
-            right
-          </button>
-          <button
-            onClick={() => setIsCollapsed((c) => [c[0], c[1], !c[2], c[3]])}
-          >
-            top
-          </button>
-          <button
-            onClick={() => setIsCollapsed((c) => [c[0], c[1], c[2], !c[3]])}
-          >
-            bottom
-          </button>
+          <CollapseButton action={setIsCollapsed} buttonFor={'left'}>Left</CollapseButton>
+          <CollapseButton action={setIsCollapsed} buttonFor={'right'} >Right</CollapseButton>
+          <CollapseButton action={setIsCollapsed} buttonFor={'top'} >Top</CollapseButton>
+          <CollapseButton action={setIsCollapsed} buttonFor={'bottom'}>Bottom</CollapseButton>
         </div>
       </header>
       <ResizableHorizontalGrid
-        // initialWidths={{ left: gridH.__typeName==='HorizontalGrid'?gridH.left.currentSize:300, right: 200 }}
         initialWidths={getHorizontalGridWidths(5, '15vw', 200)}
         getCurrentState={getGridState}
         gridId={5}
-        collapseLeft={isCollapsed[0]}
-        collapseRight={isCollapsed[1]}
+        collapseLeft={isCollapsed.left}
+        collapseRight={isCollapsed.right}
       >
-        <div>
-          Lorem ipsum dolor sit amet, {getHorizontalGridWidths(5).left}{' '}
-          consectetur adipisicing elit. Dolores harum perferendis placeat dicta
-          id, quo nulla iure sequi explicabo laudantium.
-        </div>
+        <PlaceholderText title='Left' />
         <ResizableVerticalGrid
           gridId={6}
           initialHeight={getVerticalGridHeight(6)}
           getCurrentState={getGridState}
-          collapseTop={isCollapsed[2]}
-          collapseBottom={isCollapsed[3]}
+          collapseTop={isCollapsed.top}
+          collapseBottom={isCollapsed.bottom}
         >
-          {/* this one is optional */}
-          <div> dolor sit amet
-            consectetur adipisicing elit. Quae, eius iste. Ullam quae cumque
-            explicabo recusandae praesentium magnam harum nam.
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, eius
-            iste. Ullam quae cumque explicabo recusandae praesentium magnam
-            harum nam.
-          </div>
+          <PlaceholderText title='Top'/>
+          <PlaceholderText title='Bottom' />
         </ResizableVerticalGrid>
-        <div>
-         ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-          harum perferendis placeat dicta id, quo nulla iure sequi explicabo
-          laudantium.
-        </div>
-        {/* <ResizableVerticalGrid
-          gridId={6}
-          initialHeight={'1fr'}
-          getCurrentState={getGridState}
-        >
-          <div>
-            {' '}
-            <h1>Hello</h1>
-            <button
-              onClick={() => setHorizontalGridSize({ left: 300, right: 400 })}
-            >
-              click
-            </button>
-            {JSON.stringify(initialHorizontalGridWidths)} Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Quae, eius iste. Ullam quae
-            cumque explicabo recusandae praesentium magnam harum nam.
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, eius
-            iste. Ullam quae cumque explicabo recusandae praesentium magnam
-            harum nam.
-          </div>
-        </ResizableVerticalGrid> */}
+        <PlaceholderText title='Right' />
       </ResizableHorizontalGrid>
     </div>
   )
 }
 
 export default App
+
+type CollapseButtonProps = {
+  children: React.ReactNode
+  buttonFor: 'left' | 'right' | 'top' | 'bottom'
+  action: (
+    value: React.SetStateAction<{
+      left: boolean
+      right: boolean
+      top: boolean
+      bottom: boolean
+    }>
+  ) => void
+}
+
+function CollapseButton({children, buttonFor, action }: CollapseButtonProps) {
+  return (
+    <button
+      onClick={() =>
+        action((value) => ({ ...value, [buttonFor]: !value[buttonFor] }))
+      }
+    >
+      {children}
+    </button>
+  )
+}
+
+function PlaceholderText({title}:{title?:string}) {
+  return (
+    <div className="resizable-grid__content">
+      {title && <h2>{title}</h2>}
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
+      inventore eum cum. Ducimus dignissimos sapiente, vero a facilis sit
+      eveniet explicabo voluptatibus ullam, hic alias consequuntur ipsum? Quae
+      necessitatibus ut rerum corrupti quas esse, iure itaque asperiores, culpa
+      porro rem cupiditate, recusandae odit. Ullam placeat, ipsam quos nobis
+      cumque repudiandae sunt illo quis ipsa illum qui atque maiores
+      reprehenderit eum architecto laborum deleniti eaque sint natus? Harum,
+      facere quod. Non, voluptates qui consequatur quisquam illo nisi molestias
+      in nulla culpa distinctio alias temporibus quia corrupti sequi provident
+      nobis harum officiis maiores atque? Quidem magni aperiam dolor
+      perspiciatis neque, ipsa maxime?
+    </div>
+  )
+}

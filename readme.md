@@ -25,7 +25,7 @@ Included is a hook to save the current positions of the handles to localStorage,
   - [ResizableHorizontalGrid](#resizablehorizontalgrid)
     - [Options](#options)
   - [ResizableVerticalGrid](#resizableverticalgrid)
-    - [options:](#options-1)
+    - [Options:](#options-1)
   - [Styling with css](#styling-with-css)
   - [Hook](#hook)
   - [Nested example:](#nested-example)
@@ -120,7 +120,7 @@ function App(){
     </ResizableVerticalGrid>
 }
 ```
-### options:
+### Options:
 
 ```ts
 type ResizableVerticalGridProps = {
