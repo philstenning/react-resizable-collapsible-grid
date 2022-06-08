@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import styles from './resizableVerticalGrid.module.css'
 
-type ResizableGrid = {
+type ResizableVerticalGridProps = {
   children: React.ReactNode[]
   gridId?: number | string
   minHeight?: number
@@ -33,7 +33,7 @@ function ResizableVerticalGrid({
   collapseBottom = false,
   gridId = 0,
   getCurrentState,
-}: ResizableGrid) {
+}: ResizableVerticalGridProps) {
   const [panelHeight, setPanelHeight] = useState(
     collapseBottom || collapseTop ? -2 : -1
   )

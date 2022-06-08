@@ -2,7 +2,7 @@ import React, { useState, CSSProperties, useRef, useEffect } from 'react'
 
 import styles from './resizableHorizontalGrid.module.css'
 
-type ResizableGrid = {
+type ResizableHorizontalGridProps = {
   children: React.ReactNode[]
   gridId?: number | string
   minWidth?: number
@@ -38,7 +38,7 @@ function ResizableHorizontalGrid({
   collapseRight = false,
   minWidth = 50,
   gridId = 0,
-}: ResizableGrid) {
+}: ResizableHorizontalGridProps) {
   const [panelWidths1, setPanelWidths1] = useState({
     left: initialWidths.left,
     right: initialWidths.right,

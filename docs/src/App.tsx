@@ -70,6 +70,7 @@ function App() {
           collapseTop={isCollapsed[2]}
           collapseBottom={isCollapsed[3]}
         >
+          {/* this one is optional */}
           <div> dolor sit amet
             consectetur adipisicing elit. Quae, eius iste. Ullam quae cumque
             explicabo recusandae praesentium magnam harum nam.
