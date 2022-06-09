@@ -16,4 +16,6 @@ dist-ssr
 packages/**/cypress/videos
 packages/**/cypress/screenshots
 
+.env
+
 

@@ -6,16 +6,21 @@
   "main": "./dist/index.js",
   "scripts": {
     "dev": "pnpm -r dev",
-    "clean": "rimraf dist",
+    "clean": "pnpm clean:lib && pnpm clean:docs",
+    "clean:lib": "rimraf dist",
+    "clean:docs": "rimraf docs/dist",
     "build:ts": "tsc",
+    "build": " pnpm build:lib && pnpm build:docs",
     "build:css": "postcss   src/**/*.css --dir dist",
-    "build": " pnpm build:ts && pnpm build:css",
+    "build:lib": " pnpm build:ts && pnpm build:css",
+    "build:docs": "pnpm --filter docs build",
     "build:clean": "pnpm clean && pnpm build:ts && pnpm build:css",
     "watch:css": "postcss  src/**/*.css --dir dist -w",
     "watch:ts:": "tsc -w",
     "watch": "concurrently \"tsc -w\" \"postcss  src/**/*.css --dir dist -w\"  ",
-    "docs:build": "pnpm --filter docs build",
-    "docs:publish": "pnpm --filter docs demo"
+    "docs:publish": "pnpm --filter docs demo",
+    "demo": "gh-pages -d docs/dist",
+    "preview": "pnpm --filter docs preview"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +30,7 @@
     "@types/react-dom": "^18.0.0",
     "concurrently": "^7.2.1",
     "cssnano": "^5.1.10",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
     "postcss-combine-duplicated-selectors": "^10.0.3",
@@ -43,4 +49,5 @@
     "react-dom": "^18.0.0"
   }
 }
+
 
