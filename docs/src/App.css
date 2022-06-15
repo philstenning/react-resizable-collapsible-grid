@@ -10,7 +10,7 @@
     var(--indigo-3),
     var(--cyan-3)
   );
-  --scrollbar-color: var(--grape-4);
+  --scrollbar-color: var(--gray-7);
 }
 
 h1,
@@ -89,6 +89,12 @@ p {
   width: fit-content;
   /* border: solid; */
   margin-inline: auto;
+
+  & h2{
+    padding-top: 1rem;
+    font-size: 1.75rem;
+    color:var(--cyan-1)
+  }
 }
 .hero__header {
   font-size: 4rem;

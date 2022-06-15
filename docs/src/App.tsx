@@ -46,9 +46,8 @@ function App() {
             Right
           </CollapseButton> */}
             <CollapseButton action={setIsCollapsed} buttonFor={'top'}>
-             Toggle Top
+              Toggle Top
             </CollapseButton>
-           
           </div>
         )}
       </header>
@@ -72,6 +71,8 @@ function App() {
               <h1 className="hero__header">
                 react resizable <br /> collapsible grid
               </h1>
+
+           <h2>components for building resizable web apps</h2>
               <ul className="hero__list">
                 <li>resize handles for changing section size</li>
                 <li>Collapsible sections for quick page layout change</li>
@@ -117,7 +118,8 @@ type CollapseButtonProps = {
 
 function CollapseButton({ children, buttonFor, action }: CollapseButtonProps) {
   return (
-    <button className='hero__btn'
+    <button
+      className="hero__btn"
       onClick={() =>
         action((value) => ({ ...value, [buttonFor]: !value[buttonFor] }))
       }
@@ -255,13 +257,6 @@ function PlaceholderText({ title, className, children }: PlaceholderTextProp) {
           <div className="sudo-text__box sudo-text__box--3"></div>
           <div className="sudo-text__box sudo-text__box--2"></div>
           <div className="sudo-text__box sudo-text__box--1"></div>
-
-
-
-
-         
-
-         
         </div>
       )}
       {children}
