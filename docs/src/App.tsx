@@ -37,12 +37,20 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <div className="button-group">
-          <CollapseButton action={setIsCollapsed} buttonFor={'left'}>Left</CollapseButton>
-          <CollapseButton action={setIsCollapsed} buttonFor={'right'} >Right</CollapseButton>
-          <CollapseButton action={setIsCollapsed} buttonFor={'top'} >Top</CollapseButton>
-          <CollapseButton action={setIsCollapsed} buttonFor={'bottom'}>Bottom</CollapseButton>
-        </div>
+        {isCollapsed.top && (
+          <div className="button-group">
+            {/* <CollapseButton action={setIsCollapsed} buttonFor={'left'}>
+            Left
+          </CollapseButton>
+          <CollapseButton action={setIsCollapsed} buttonFor={'right'}>
+            Right
+          </CollapseButton> */}
+            <CollapseButton action={setIsCollapsed} buttonFor={'top'}>
+             Toggle Top
+            </CollapseButton>
+           
+          </div>
+        )}
       </header>
       <ResizableHorizontalGrid
         initialWidths={getHorizontalGridWidths(5, '15vw', 200)}
@@ -51,7 +59,7 @@ function App() {
         collapseLeft={isCollapsed.left}
         collapseRight={isCollapsed.right}
       >
-        <PlaceholderText title='Left' />
+        <PlaceholderText title="Left" />
         <ResizableVerticalGrid
           gridId={6}
           initialHeight={getVerticalGridHeight(6)}
@@ -59,10 +67,34 @@ function App() {
           collapseTop={isCollapsed.top}
           collapseBottom={isCollapsed.bottom}
         >
-          <PlaceholderText title='Top'/>
-          <PlaceholderText title='Bottom' />
+          <PlaceholderText className="centered">
+            <div className="hero">
+              <h1 className="hero__header">
+                react resizable <br /> collapsible grid
+              </h1>
+              <ul className="hero__list">
+                <li>resize handles for changing section size</li>
+                <li>Collapsible sections for quick page layout change</li>
+              </ul>
+              <div className="hero__button-group">
+                <CollapseButton action={setIsCollapsed} buttonFor={'left'}>
+                  Toggle Right
+                </CollapseButton>
+                <CollapseButton action={setIsCollapsed} buttonFor={'bottom'}>
+                  Toggle Bottom
+                </CollapseButton>
+                <CollapseButton action={setIsCollapsed} buttonFor={'top'}>
+                  Toggle Top
+                </CollapseButton>
+                <CollapseButton action={setIsCollapsed} buttonFor={'right'}>
+                  Toggle Right
+                </CollapseButton>
+              </div>
+            </div>
+          </PlaceholderText>
+          <PlaceholderText title="Bottom" />
         </ResizableVerticalGrid>
-        <PlaceholderText title='Right' />
+        <PlaceholderText title="Right" />
       </ResizableHorizontalGrid>
     </div>
   )
@@ -83,9 +115,9 @@ type CollapseButtonProps = {
   ) => void
 }
 
-function CollapseButton({children, buttonFor, action }: CollapseButtonProps) {
+function CollapseButton({ children, buttonFor, action }: CollapseButtonProps) {
   return (
-    <button
+    <button className='hero__btn'
       onClick={() =>
         action((value) => ({ ...value, [buttonFor]: !value[buttonFor] }))
       }
@@ -95,21 +127,144 @@ function CollapseButton({children, buttonFor, action }: CollapseButtonProps) {
   )
 }
 
-function PlaceholderText({title}:{title?:string}) {
+type PlaceholderTextProp = {
+  children?: React.ReactNode
+  title?: string
+  className?: string
+}
+
+function PlaceholderText({ title, className, children }: PlaceholderTextProp) {
   return (
-    <div className="resizable-grid__content">
-      {title && <h2>{title}</h2>}
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
-      inventore eum cum. Ducimus dignissimos sapiente, vero a facilis sit
-      eveniet explicabo voluptatibus ullam, hic alias consequuntur ipsum? Quae
-      necessitatibus ut rerum corrupti quas esse, iure itaque asperiores, culpa
-      porro rem cupiditate, recusandae odit. Ullam placeat, ipsam quos nobis
-      cumque repudiandae sunt illo quis ipsa illum qui atque maiores
-      reprehenderit eum architecto laborum deleniti eaque sint natus? Harum,
-      facere quod. Non, voluptates qui consequatur quisquam illo nisi molestias
-      in nulla culpa distinctio alias temporibus quia corrupti sequi provident
-      nobis harum officiis maiores atque? Quidem magni aperiam dolor
-      perspiciatis neque, ipsa maxime?
+    <div className={`resizable-grid__content ${className ? className : ''}`}>
+      {/* {title && <h2>{title}</h2>} */}
+      {!children && (
+        <div className="sudo-text">
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+
+          <div className="sudo-text__box sudo-text__box--1"></div>
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+
+          <div className="sudo-text__box sudo-text__box--3"></div>
+          <div className="sudo-text__box sudo-text__box--2"></div>
+          <div className="sudo-text__box sudo-text__box--1"></div>
+
+
+
+
+         
+
+         
+        </div>
+      )}
+      {children}
     </div>
   )
 }
