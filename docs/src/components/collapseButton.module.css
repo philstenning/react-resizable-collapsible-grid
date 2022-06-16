@@ -1,0 +1,11 @@
+.btn {
+  background: var(--cyan-8);
+  color: var(--cyan-1);
+  padding: var(--size-2);
+  border-radius: var(--radius-3);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: var(--grape-9);
+  }
+}

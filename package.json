@@ -23,11 +23,10 @@
     "watch:ts:": "tsc -w",
     "watch": "concurrently \"tsc -w\" \"postcss  src/**/*.css --dir dist -w\"  ",
     "docs:publish": "pnpm --filter docs demo",
-    "demo": "gh-pages -d docs/dist",
     "preview": "pnpm --filter docs preview",
     "semantic-release": "semantic-release"
   },
-  "keywords": [],
+  "keywords": ["react", "resizable", "collapsible","grid"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -38,7 +37,6 @@
     "@types/react-dom": "^18.0.0",
     "concurrently": "^7.2.1",
     "cssnano": "^5.1.10",
-    "gh-pages": "^4.0.0",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
     "postcss-combine-duplicated-selectors": "^10.0.3",

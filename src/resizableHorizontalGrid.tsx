@@ -80,12 +80,10 @@ function ResizableHorizontalGrid({
   }
 
   useEffect(() => {
-    console.log({ collapseRight })
     setRightIsCollapsed(collapseRight)
   }, [collapseRight])
 
   useEffect(() => {
-    console.log({ collapseLeft })
     setLeftIsCollapsed(collapseLeft)
   }, [collapseLeft])
 
