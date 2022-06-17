@@ -229,16 +229,27 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
     handleResize(true, id)
   }
 
-  const handleTouchResize = (e: React.TouchEvent<HTMLDivElement>) => {
+  const handleStartTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    // e.preventDefault()
+    e.stopPropagation()
+    handleResize(true, id)
+  }
+  const handleEndTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    handleResize(false, id)
+  }
+  
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.stopPropagation()
     resize(e.nativeEvent.touches[0].clientX)
   }
   return (
     <div
       onMouseDown={handleMouseEvent}
       className={isCollapsed ? '' : styles.divider}
-      onTouchStart={() => handleResize(true, id)}
-      onTouchMove={handleTouchResize}
-      onTouchEnd={() => handleResize(false, id)}
+      onTouchStart={handleStartTouch}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleEndTouch}
     ></div>
   )
 }

@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
   }
   return {
     plugins: [react()],
-    server: { port: 8899 },
+    server: { port: 8899 , host:true},
   }
 })
 
