@@ -1,7 +1,7 @@
 {
   "name": "react-resizable-collapsible-grid",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "Components For Building Resizable Web Apps",
   "typings": "dist/index.d.ts",
   "main": "./dist/index.js",
   "files": [
@@ -63,3 +63,4 @@
     "url": "https://github.com/philstenning/react-resizable-collapsible-grid.git"
   }
 }
+
