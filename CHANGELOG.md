@@ -1,3 +1,14 @@
+## [1.0.1](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.0.0...v1.0.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* **CI:** 🐛 fix broken lock file ([72ee3a1](https://github.com/philstenning/react-resizable-collapsible-grid/commit/72ee3a19457a00c493edf6c731b335455ba66573))
+* **libray:** 🔥 remove console.logs ([210ed9c](https://github.com/philstenning/react-resizable-collapsible-grid/commit/210ed9c6ed110bde3a230c0caa75658ea90d99e3))
+* **libray:** 🔥 remove console.logs ([8d2aac8](https://github.com/philstenning/react-resizable-collapsible-grid/commit/8d2aac8f916bb381ebf8668f474b0c7779f4145c))
+* move gh-pages back to docs ([5041df1](https://github.com/philstenning/react-resizable-collapsible-grid/commit/5041df1c90fbf5e9162935e8ee247ad9ee8b64e6))
+* move gh-pages back to docs ([52c4d35](https://github.com/philstenning/react-resizable-collapsible-grid/commit/52c4d35e4a5f1c13836d1b1f29c5ad7ab7153b38))
+
 # 1.0.0 (2022-06-15)
 
 
