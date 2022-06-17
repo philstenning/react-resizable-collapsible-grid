@@ -7,14 +7,16 @@
   overflow: hidden;
 }
 
-
 .divider {
+  touch-action: manipulation;
   position: relative;
   background-color: var(--resizable-grid-track-color);
   width: 2px;
   height: 100%;
   opacity: var(--resizable-grid-track-opacity);
   transition: all 0.3s ease-in-out;
+
+  
 
   &:hover {
     opacity: var(--resizable-grid-track-opacity-hover);
@@ -49,6 +51,21 @@
     animation-direction: normal;
     animation-fill-mode: forwards;
     animation-delay: 0.3s;
+  }
+
+
+  @media (hover: none) {
+    & {
+      width: 10px;
+    }
+    &:hover::after {
+
+    width: 150px;
+  background-color:green;
+   opacity: .2;
+    left: -75px;
+  }
+
   }
 }
 

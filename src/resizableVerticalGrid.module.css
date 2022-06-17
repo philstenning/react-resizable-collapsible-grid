@@ -12,6 +12,7 @@
 }
 
 .divider {
+  touch-action: manipulation;
   position: relative;
   background-color: var(--resizable-grid-track-color);
   width: 100%;
@@ -19,6 +20,8 @@
 
   opacity: var(--resizable-grid-track-opacity);
   transition: all 0.3s ease-in-out;
+
+  
 
   &:hover {
     cursor: ns-resize;
@@ -58,6 +61,21 @@
     animation-fill-mode: forwards;
     animation-delay: 0.3s;
   }
+
+  @media (hover: none) {
+    & {
+      height: 10px;
+    }
+
+     &:hover::after {
+      top: -75px;
+    height: 150px;
+   background-color:green;
+   opacity: .2;
+  }
+  }
+
+
 }
 
 @keyframes grow-v {

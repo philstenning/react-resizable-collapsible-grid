@@ -177,19 +177,29 @@ function Divider({
   resize,
   resizeFinished,
 }: DividerProps) {
+  const handleTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    // e.preventDefault()
+    e.stopPropagation()
+    setIsResizing(true)
+  }
+  const handleEndTouch = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    resizeFinished(e)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    // e.preventDefault()
+    e.stopPropagation()
+     resize(e.nativeEvent.touches[0].clientY)
+  }
   return (
     <div
       className={isCollapsed ? '' : styles.divider}
-      // className={
-      //   isCollapsed
-      //     ? ''
-      //     : 'resizable-grid__divider resizable-grid__divider--vertical'
-      // }
       onMouseDown={() => setIsResizing(true)}
-      onTouchStart={() => setIsResizing(true)}
-      onTouchEnd={resizeFinished}
-      // onTouchEnd={() => setIsResizing(false)}
-      onTouchMove={(e) => resize(e.nativeEvent.touches[0].clientY)}
+      onTouchStart={handleTouch}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleEndTouch}
     ></div>
   )
 }
