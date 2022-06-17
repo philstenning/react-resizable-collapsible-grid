@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import Header from './components/header'
 /** Library we are using for demo */
 import {
   ResizableHorizontalGrid,
@@ -71,6 +71,7 @@ function App() {
           collapseBottom={isCollapsed.bottom}
         >
           <PlaceholderText className="centered">
+            <Header/>
             <Hero dispatchAction={setIsCollapsed} />
           </PlaceholderText>
           <PlaceholderText />
