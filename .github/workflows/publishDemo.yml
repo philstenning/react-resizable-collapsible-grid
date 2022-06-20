@@ -37,6 +37,9 @@ jobs:
       - name: build docs
         run: pnpm build:docs
       
+      - name: lint
+        run: pnpm lint
+      
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
