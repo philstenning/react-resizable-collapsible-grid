@@ -34,8 +34,11 @@ jobs:
           version: ^7.1.0
           run_install: true
       
-      - name: build Library
-        run: pnpm build
+      - name: build css
+        run: pnpm build:css
+
+      - name: build library
+        run: pnpm build:ts
       
       - name: Release
         run: |

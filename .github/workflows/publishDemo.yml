@@ -31,14 +31,14 @@ jobs:
           version: ^7.1.0
           run_install: true
       
-      - name: build Library
-        run: pnpm build:lib
+      - name: build css
+        run: pnpm build:css
 
-      - name: build docs
+      - name: build library
+        run: pnpm build:ts
+
+      - name: build Docs
         run: pnpm build:docs
-      
-      - name: lint
-        run: pnpm lint
       
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
