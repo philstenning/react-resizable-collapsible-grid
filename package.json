@@ -16,7 +16,7 @@
     "build:ts": "tsc",
     "build": " pnpm build:lib && pnpm build:docs",
     "build:css": "postcss   src/**/*.css --base src --dir  dist",
-    "build:lib": " pnpm build:ts && pnpm build:css",
+    "build:lib": " pnpm build:css && pnpm build:ts",
     "build:docs": "pnpm --filter docs build",
     "build:clean": "pnpm clean && pnpm build:ts && pnpm build:css",
     "lint": "eslint src/**.ts* --fix ",
