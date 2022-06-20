@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 /** Library we are using for demo */
 import {
   ResizableHorizontalGrid,
@@ -19,7 +19,8 @@ import Hero from './components/hero'
 
 /** CSS */
 import './App.css'
-import 'react-resizable-collapsible-grid/dist/resizableGrid.css'
+// eslint-disable-next-line
+import '../../dist/resizableGrid.css'
 
 function App() {
   const [isCollapsed, setIsCollapsed] =
@@ -49,7 +50,7 @@ function App() {
       <header className="header">
         {isCollapsed.top && (
           <div className="button-group">
-            <CollapseButton action={setIsCollapsed} buttonFor={'top'}>
+            <CollapseButton action={setIsCollapsed} buttonFor="top">
               Toggle Top
             </CollapseButton>
           </div>
@@ -71,7 +72,7 @@ function App() {
           collapseBottom={isCollapsed.bottom}
         >
           <PlaceholderText className="centered">
-            <Header/>
+            <Header />
             <Hero dispatchAction={setIsCollapsed} />
           </PlaceholderText>
           <PlaceholderText />
