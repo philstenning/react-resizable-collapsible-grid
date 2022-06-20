@@ -13,12 +13,11 @@
     "clean": "pnpm clean:lib && pnpm clean:docs",
     "clean:lib": "rimraf dist",
     "clean:docs": "rimraf docs/dist",
-    "build:ts": "tsc",
-    "build": " pnpm build:lib && pnpm build:docs",
-    "build:css": "postcss   src/**/*.css --base src --dir  dist",
-    "build:lib": " pnpm build:css && pnpm build:ts",
+    "build:all": "pnpm build:lib && pnpm build:docs",
+    "build:css": "postcss  src/**/*.css --base src --dir dist",
+    "build:lib": "tsc",
     "build:docs": "pnpm --filter docs build",
-    "build:clean": "pnpm clean && pnpm build:ts && pnpm build:css",
+    "build:clean": "pnpm clean && pnpm build:css && pnpm build:lib",
     "lint": "eslint src/**.ts* --fix ",
     "watch:css": "postcss  src/**/*.css --base src --dir dist -w",
     "watch-ts:": "pnpm tsc -w",
@@ -76,4 +75,3 @@
     "url": "https://github.com/philstenning/react-resizable-collapsible-grid.git"
   }
 }
-

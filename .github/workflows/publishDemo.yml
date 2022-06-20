@@ -35,11 +35,11 @@ jobs:
         run: pnpm build:css
 
       - name: build library
-        run: pnpm build:ts
+        run: pnpm build:lib
 
       - name: build Docs
         run: pnpm build:docs
-      
+    
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
