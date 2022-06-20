@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from './components/header'
 /** Library we are using for demo */
 import {
   ResizableHorizontalGrid,
@@ -10,6 +9,7 @@ import {
 } from 'react-resizable-collapsible-grid'
 
 /** Local Components */
+import Header from './components/header'
 import PlaceholderText from './components/placeholderText'
 import CollapseButton, {
   initialButtonState,

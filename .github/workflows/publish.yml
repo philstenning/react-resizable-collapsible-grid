@@ -38,7 +38,7 @@ jobs:
         run: pnpm build:css
 
       - name: build library
-        run: pnpm build:ts
+        run: pnpm build:lib
       
       - name: Release
         run: |
