@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.0.1...v1.1.0) (2022-06-20)
+
+
+### Bug Fixes
+
+* **CI:** 🐛 error from actions after updating scripts in package.json ([4140732](https://github.com/philstenning/react-resizable-collapsible-grid/commit/4140732239e68140b537a3e35763c814ff9e75c2))
+* **library:** 🎨 tidy up code ([be95841](https://github.com/philstenning/react-resizable-collapsible-grid/commit/be95841f4af75f600a0a798f5ab3ed5720b1e535))
+
+
+### Features
+
+* **library:** 🎨 move components to own folder ([146ae36](https://github.com/philstenning/react-resizable-collapsible-grid/commit/146ae36651a0d6a6169b1be7fb46568bde7c4a6e))
+
 ## [1.0.1](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.0.0...v1.0.1) (2022-06-16)
 
 
