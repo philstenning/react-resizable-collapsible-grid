@@ -20,7 +20,7 @@ import Hero from './components/hero'
 /** CSS */
 import './App.css'
 // eslint-disable-next-line
-import '../../dist/resizableGrid.css'
+import './styles/resizableGrid.css'
 
 function App() {
   const [isCollapsed, setIsCollapsed] =
