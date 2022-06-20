@@ -13,12 +13,10 @@ function useResizeGridLocalStorage() {
     localStorage.setItem('gridState', JSON.stringify(newState))
   }
 
-  
-  const getVerticalGrid = (gridId: number | string) => {
-    return (state.filter(
+  const getVerticalGrid = (gridId: number | string) =>
+    (state.filter(
       (s) => s.__typeName === 'VerticalGrid' && s.gridId === gridId
     )[0] ?? {}) as VerticalGridState
-  }
   const getVerticalGridHeight = (
     gridId: number | string,
     defaultHeight: number | string = '50%'
@@ -53,6 +51,5 @@ function useResizeGridLocalStorage() {
     setResizeState,
   }
 }
-
 
 export default useResizeGridLocalStorage

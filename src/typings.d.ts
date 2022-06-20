@@ -1,1 +1,2 @@
-declare module "*.module.css"
+// eslint-disable-next-line
+declare module '*.module.css'

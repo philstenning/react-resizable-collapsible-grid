@@ -7,7 +7,13 @@
  [👉 Try It Out  👈](https://philstenning.github.io/react-resizable-collapsible-grid/)
 
  </div>
+<div align="center">
 
+
+![GitHub](https://img.shields.io/github/license/philstenning/react-resizable-collapsible-grid)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/philstenning/react-resizable-collapsible-grid/Publish%20Demo)
+
+</div>
 React Resizable Collapsible Grid is a component for building apps where the user might need to resize and or collapse parts of the app. If you use apps like VS code you are already familiar with how this works.
 
 The components work on desktop and mobile with touch events.
