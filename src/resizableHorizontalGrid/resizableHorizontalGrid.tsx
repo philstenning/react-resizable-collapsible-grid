@@ -1,6 +1,23 @@
 import React, { useState, CSSProperties, useRef, useEffect } from 'react'
-
+import Divider from './resizableHorizontalDivider'
 import styles from './resizableHorizontalGrid.module.css'
+
+export type HorizontalGridWidths = {
+  left: number | string
+  right: number | string
+}
+
+export type HorizontalGridSideState = {
+  isCollapsed: boolean
+  // preCollapsedSize: number | string
+  currentSize: number | string
+}
+export type HorizontalGridState = {
+  __typeName: 'HorizontalGrid'
+  gridId: number | string
+  left: HorizontalGridSideState
+  right: HorizontalGridSideState
+}
 
 type ResizableHorizontalGridProps = {
   children: React.ReactNode[]
@@ -9,25 +26,8 @@ type ResizableHorizontalGridProps = {
   collapseLeft?: boolean
   collapseRight?: boolean
   initialWidths?: HorizontalGridWidths
+  // eslint-disable-next-line
   getCurrentState?: ({ gridId, left, right }: HorizontalGridState) => void
-}
-
-export type HorizontalGridWidths = {
-  left: number | string
-  right: number | string
-}
-
-export type HorizontalGridState = {
-  __typeName: 'HorizontalGrid'
-  gridId: number | string
-  left: HorizontalGridSideState
-  right: HorizontalGridSideState
-}
-
-export type HorizontalGridSideState = {
-  isCollapsed: boolean
-  // preCollapsedSize: number | string
-  currentSize: number | string
 }
 
 function ResizableHorizontalGrid({
@@ -44,8 +44,6 @@ function ResizableHorizontalGrid({
     right: initialWidths.right,
   })
 
-  // left:typeof initialWidths.left==='number'?initialWidths.left:-1,
-  // right:typeof initialWidths.right==='number'?initialWidths.right:-1
   const [leftIsCollapsed, setLeftIsCollapsed] = useState(collapseLeft)
   const [rightIsCollapsed, setRightIsCollapsed] = useState(collapseRight)
 
@@ -71,10 +69,10 @@ function ResizableHorizontalGrid({
     }
   }
 
-  const handleResize = (isResizing: boolean, currentPanel: number) => {
-    setCurrentPanel(currentPanel)
-    setIsResizing(isResizing)
-    if (!isResizing) {
+  const handleResize = (_isResizing: boolean, _currentPanel: number) => {
+    setCurrentPanel(_currentPanel)
+    setIsResizing(_isResizing)
+    if (!_isResizing) {
       updateParentContainer()
     }
   }
@@ -86,11 +84,6 @@ function ResizableHorizontalGrid({
   useEffect(() => {
     setLeftIsCollapsed(collapseLeft)
   }, [collapseLeft])
-
-  /** Called on this grid for resizing */
-  const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    resize(e.clientX)
-  }
 
   /** Called on divider touch event as well as resizeMouse above*/
   const resize = (mousePosition: number) => {
@@ -129,6 +122,11 @@ function ResizableHorizontalGrid({
     }
   }
 
+  /** Called on this grid for resizing */
+  const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    resize(e.clientX)
+  }
+
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isResizing) {
       e.stopPropagation()
@@ -155,7 +153,7 @@ function ResizableHorizontalGrid({
     isCollapsed: boolean
   ) => {
     if (typeof cssWidth === 'number') {
-      return `${isCollapsed ? '' : cssWidth + 'px'}`
+      return isCollapsed ? '' : `${cssWidth}px`
     }
     return `${isCollapsed ? '' : cssWidth}`
   }
@@ -188,6 +186,7 @@ function ResizableHorizontalGrid({
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
       onMouseLeave={handleLeave}
+      role="presentation"
     >
       {!leftIsCollapsed && children[0]}
       {!leftIsCollapsed && (
@@ -210,47 +209,6 @@ function ResizableHorizontalGrid({
       )}
       {!rightIsCollapsed && children.length >= 3 && children[2]}
     </div>
-  )
-}
-
-type DividerProps = {
-  id: number
-  isCollapsed: boolean
-  handleResize: (isResizing: boolean, currentPanel: number) => void
-  resize: (mousePosition: number) => void
-}
-
-const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
-  const handleMouseEvent = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.stopPropagation()
-    e.preventDefault()
-    handleResize(true, id)
-  }
-
-  const handleStartTouch = (e: React.TouchEvent<HTMLDivElement>) => {
-    // e.preventDefault()
-    e.stopPropagation()
-    handleResize(true, id)
-  }
-  const handleEndTouch = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    handleResize(false, id)
-  }
-  
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    resize(e.nativeEvent.touches[0].clientX)
-  }
-  return (
-    <div
-      onMouseDown={handleMouseEvent}
-      className={isCollapsed ? '' : styles.divider}
-      onTouchStart={handleStartTouch}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleEndTouch}
-    ></div>
   )
 }
 
