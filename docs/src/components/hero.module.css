@@ -5,17 +5,18 @@
   /* border: solid; */
   margin-inline: auto;
 
-  & h2{
+  & h2 {
     padding-top: 1rem;
     font-size: 1.75rem;
-    color:var(--cyan-1)
+    color: var(--cyan-1);
   }
 }
 
 .hero__header {
   font-size: 4rem;
   background: var(--gradient-4);
-  background-clip: text;
+
+  -webkit-background-clip: text; /* stylelint-disable-line */
   -webkit-text-fill-color: transparent;
 }
 

@@ -30,7 +30,8 @@
     "no-underscore-dangle": ["error", { "allow": ["__typeName"] }],
     "spaced-comment": ["error", "always"],
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": 0
   },
   "settings": {},
   "root": true

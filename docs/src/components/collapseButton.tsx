@@ -1,9 +1,11 @@
+import React from 'react'
 import styles from './collapseButton.module.css'
 
 type CollapseButtonProps = {
   children: React.ReactNode
   buttonFor: 'left' | 'right' | 'top' | 'bottom'
   action: (
+    // eslint-disable-next-line
     value: React.SetStateAction<{
       left: boolean
       right: boolean
@@ -13,8 +15,6 @@ type CollapseButtonProps = {
   ) => void
 }
 
-type CollapsedGridButtonState = typeof initialButtonState
-
 const initialButtonState = {
   left: false,
   right: false,
@@ -22,9 +22,16 @@ const initialButtonState = {
   bottom: false,
 }
 
-export default function CollapseButton({ children, buttonFor, action }: CollapseButtonProps) {
+type CollapsedGridButtonState = typeof initialButtonState
+
+export default function CollapseButton({
+  children,
+  buttonFor,
+  action,
+}: CollapseButtonProps) {
   return (
     <button
+      type="button"
       className={styles.btn}
       onClick={() =>
         action((value) => ({ ...value, [buttonFor]: !value[buttonFor] }))
@@ -35,5 +42,5 @@ export default function CollapseButton({ children, buttonFor, action }: Collapse
   )
 }
 
-export {initialButtonState}
+export { initialButtonState }
 export type { CollapsedGridButtonState }

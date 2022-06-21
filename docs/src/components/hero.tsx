@@ -4,6 +4,7 @@ import styles from './hero.module.css'
 
 type Props = {
   dispatchAction: (
+    // eslint-disable-next-line
     value: React.SetStateAction<{
       left: boolean
       right: boolean
@@ -12,8 +13,6 @@ type Props = {
     }>
   ) => void
 }
-
-
 
 export default function Hero({ dispatchAction }: Props) {
   return (
@@ -28,16 +27,16 @@ export default function Hero({ dispatchAction }: Props) {
         <li>Collapsible sections for quick page layout change</li>
       </ul>
       <div className={styles['hero__button-group']}>
-        <CollapseButton action={dispatchAction} buttonFor={'left'}>
+        <CollapseButton action={dispatchAction} buttonFor="left">
           Toggle Left
         </CollapseButton>
-        <CollapseButton action={dispatchAction} buttonFor={'bottom'}>
+        <CollapseButton action={dispatchAction} buttonFor="bottom">
           Toggle Bottom
         </CollapseButton>
-        <CollapseButton action={dispatchAction} buttonFor={'top'}>
+        <CollapseButton action={dispatchAction} buttonFor="top">
           Toggle Top
         </CollapseButton>
-        <CollapseButton action={dispatchAction} buttonFor={'right'}>
+        <CollapseButton action={dispatchAction} buttonFor="right">
           Toggle Right
         </CollapseButton>
       </div>
