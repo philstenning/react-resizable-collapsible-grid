@@ -21,6 +21,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-react: ^7.30.0
       eslint-plugin-react-hooks: ^4.6.0
+      husky: ^8.0.0
       postcss: ^8.4.14
       postcss-cli: ^9.1.0
       postcss-combine-duplicated-selectors: ^10.0.3
@@ -56,6 +57,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_5zix3foh2mji32kvsxutphovia
       eslint-plugin-react: 7.30.0_eslint@8.18.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.18.0
+      husky: 8.0.1
       postcss: 8.4.14
       postcss-cli: 9.1.0_postcss@8.4.14
       postcss-combine-duplicated-selectors: 10.0.3_postcss@8.4.14
@@ -2830,6 +2832,12 @@ packages:
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+    dev: true
+
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /ignore/5.2.0:
