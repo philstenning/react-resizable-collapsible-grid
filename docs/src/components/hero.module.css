@@ -1,6 +1,7 @@
 .hero {
   padding-top: 3rem;
   width: fit-content;
+
   /* border: solid; */
   margin-inline: auto;
 
@@ -10,10 +11,11 @@
     color:var(--cyan-1)
   }
 }
+
 .hero__header {
   font-size: 4rem;
   background: var(--gradient-4);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

@@ -20,10 +20,12 @@ h4 {
   max-inline-size: 100%;
   color: var(--gray-1);
 }
+
 p {
   max-inline-size: 100%;
   text-align: left;
 }
+
 .App {
   text-align: center;
   height: 100vh;
@@ -81,17 +83,19 @@ p {
 
 .centered {
   text-transform: capitalize;
+
   /* align-self: center; */
 }
-
 
 .sudo-text {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
   /* gap: 1rem; */
-  column-gap: .5rem;
+  column-gap: 0.5rem;
   row-gap: 1rem;
+
   /* border: solid; */
 }
 
@@ -100,23 +104,25 @@ p {
   background: var(--gray-8);
   height: 1.25rem;
   border-radius: var(--radius-2);
-  
-  &:hover{
-    background: var(--gray-7);
 
+  &:hover {
+    background: var(--gray-7);
   }
 }
+
 .sudo-text__box--1 {
-  width: calc(35% - (1rem)/3);
+  width: calc(35% - (1rem) / 3);
   min-width: 20%;
 }
+
 .sudo-text__box--2 {
-  width:  calc(45% - (1rem)/3);
-   min-width: 20%;
+  width: calc(45% - (1rem) / 3);
+  min-width: 20%;
 }
+
 .sudo-text__box--3 {
-  width:  calc(15% - (1rem)/3);
-   min-width: 12%;
+  width: calc(15% - (1rem) / 3);
+  min-width: 12%;
 }
 
 /* style the scrollbar. */
