@@ -4,6 +4,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
 .githubIcon{
     fill: var(--gray-2);
     stroke: none;

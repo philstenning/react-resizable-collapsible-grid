@@ -19,12 +19,16 @@
     "build:docs": "pnpm --filter docs build",
     "build:clean": "pnpm clean && pnpm build:css && pnpm build:lib",
     "lint": "eslint src/**.ts* --fix ",
+    "lint:docs": "eslint docs/src/**.ts* --fix",
+    "stylelint": "stylelint src/**/*.css --fix",
+    "stylelint:docs": "stylelint docs/src/**/*.css --fix",
     "watch:css": "postcss  src/**/*.css --base src --dir dist -w",
     "watch-ts:": "pnpm tsc -w",
     "watch": "concurrently \"pnpm:watch:css\" \"tsc -w\" ",
     "docs:publish": "pnpm --filter docs demo",
     "preview": "pnpm --filter docs preview",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "keywords": [
     "react",
@@ -65,7 +69,8 @@
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^26.0.0",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.2",
+    "husky": "^8.0.0"
   },
   "dependencies": {
     "react": "^18.0.0"

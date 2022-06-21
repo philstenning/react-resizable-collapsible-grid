@@ -9,5 +9,5 @@
 
   // you can also add support for autocomplete in other file extensions
   "cssvar.extensions": ["css", "html", "jsx", "tsx", "scss"],
-  "conventionalCommits.scopes": ["docs", "library","CI"]
+  "conventionalCommits.scopes": ["docs", "library", "CI", "all"]
 }

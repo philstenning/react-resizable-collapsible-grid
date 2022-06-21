@@ -21,6 +21,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-react: ^7.30.0
       eslint-plugin-react-hooks: ^4.6.0
+      husky: ^8.0.0
       postcss: ^8.4.14
       postcss-cli: ^9.1.0
       postcss-combine-duplicated-selectors: ^10.0.3
@@ -56,6 +57,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_5zix3foh2mji32kvsxutphovia
       eslint-plugin-react: 7.30.0_eslint@8.18.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.18.0
+      husky: 8.0.1
       postcss: 8.4.14
       postcss-cli: 9.1.0_postcss@8.4.14
       postcss-combine-duplicated-selectors: 10.0.3_postcss@8.4.14
@@ -380,17 +382,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@csstools/selector-specificity/2.0.0_444rcjjorr3kpoqtvoodsr46pu:
-    resolution: {integrity: sha512-rZ6vufeY/UjAgtyiJ4WvfF6XP6HizIyOfbZOg0RnecIwjrvH8Am3nN1BpKnnPZunYAkUcPPXDhwbxOtGop8cfQ==}
-    engines: {node: ^12 || ^14 || >=16}
-    peerDependencies:
-      postcss: ^8.3
-      postcss-selector-parser: ^6.0.10
-    dependencies:
-      postcss: 8.4.14
-      postcss-selector-parser: 6.0.10
-    dev: true
 
   /@csstools/selector-specificity/2.0.1_444rcjjorr3kpoqtvoodsr46pu:
     resolution: {integrity: sha512-aG20vknL4/YjQF9BSV7ts4EWm/yrjagAN7OWBNmlbEOUiu0llj4OGrFoOKK3g2vey4/p2omKCoHrWtPxSwV3HA==}
@@ -2843,6 +2834,12 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
@@ -4076,7 +4073,7 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/selector-specificity': 2.0.0_444rcjjorr3kpoqtvoodsr46pu
+      '@csstools/selector-specificity': 2.0.1_444rcjjorr3kpoqtvoodsr46pu
       postcss: 8.4.14
       postcss-selector-parser: 6.0.10
     dev: true
