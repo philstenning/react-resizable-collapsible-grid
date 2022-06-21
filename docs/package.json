@@ -2,11 +2,15 @@
   "name": "docs",
   "private": true,
   "version": "0.0.0",
+  "author": "Phil Stenning",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build  --mode production",
+    "build:ts": "vite build  --mode production",
     "preview": "vite preview --host",
-    "publish": "gh-pages -d dist"
+    "publish": "gh-pages -d dist",
+    "lint": "eslint src/**/**.tsx --fix"
   },
   "dependencies": {
     "open-props": "^1.3.16",
@@ -18,8 +22,10 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "eslint": "^8.18.0",
     "gh-pages": "^4.0.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   }
+
 }
