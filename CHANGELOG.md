@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.1.0...v1.2.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **CI:** 🐛 releases error with dist folder being uploaded ([57b1e0b](https://github.com/philstenning/react-resizable-collapsible-grid/commit/57b1e0b7ecd970d016ad6904b16da89f7f5378b8))
+* **CI:** fix ci not Compleating ([f64b12f](https://github.com/philstenning/react-resizable-collapsible-grid/commit/f64b12f95e4544cc72f1943eb42f4c2021af7c3c))
+* **docs:** 🐛 css removed from import and added to index.css ([8b2d955](https://github.com/philstenning/react-resizable-collapsible-grid/commit/8b2d9550d7c1b48d39933cf499597dd11da3c06a))
+
+
+### Features
+
+* **library:** ✨ build for esm and cjs ([9344586](https://github.com/philstenning/react-resizable-collapsible-grid/commit/93445865984711a37b21149b9c77d5e827a6340d))
 
 # [1.1.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.0.1...v1.1.0) (2022-06-20)
 
