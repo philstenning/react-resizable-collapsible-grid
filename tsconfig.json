@@ -19,7 +19,9 @@
     "removeComments": true,
     "declaration": true,
     "sourceMap": true,
-    "types": ["./src/typings"]
+    "types": ["./src/typings"],
+    "declarationDir": "types",
+    "emitDeclarationOnly": true
   },
   "include": ["src/index.tsx"]
 }
