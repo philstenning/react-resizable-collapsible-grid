@@ -31,11 +31,14 @@ jobs:
           version: ^7.1.0
           run_install: true
       
+      # compiles and moves the css into
+      # the build/css directory
       - name: build css
         run: pnpm build:css
-
+      
+      # compile the library to the dist directory
       - name: build library
-        run: pnpm build:lib
+        run: pnpm build:rollup
 
       - name: build Docs
         run: pnpm build:docs
