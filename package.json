@@ -6,7 +6,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
-  "style": "dist/css/index.css",
+  "style": "dist/index.css",
   "files": [
     "/dist",
     "CHANGELOG.md"
@@ -16,6 +16,7 @@
     "clean": "pnpm clean:lib && pnpm clean:docs",
     "clean:lib": "rimraf dist",
     "clean:docs": "rimraf docs/dist",
+    "clean:reset": "rimraf docs/node_modules && pnpm clean ",
     "build:all": "pnpm clean && pnpm build:css && pnpm build:rollup && pnpm build:docs",
     "build:css": "postcss  src/index.css --base src --dir dist/css",
     "build:lib": "tsc",
@@ -25,9 +26,9 @@
     "lint:docs": "pnpm --filter docs lint",
     "stylelint": "stylelint src/**/*.css --fix",
     "stylelint:docs": "stylelint docs/src/**/*.css --fix",
-    "watch:css": "postcss  src/**/*.css --base src --dir dist -w",
+    "watch:css": "postcss  src/index.css --base src --dir dist -w",
     "watch-ts:": "pnpm tsc -w",
-    "watch": "concurrently \"pnpm:watch:css\" \"tsc -w\" ",
+    "watch": "concurrently \"pnpm:watch:css\" \"rollup -c --watch\" ",
     "docs:publish": "pnpm --filter docs demo",
     "preview": "pnpm --filter docs preview",
     "semantic-release": "semantic-release",
@@ -96,4 +97,3 @@
     "url": "https://github.com/philstenning/react-resizable-collapsible-grid.git"
   }
 }
-
