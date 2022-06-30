@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.3.0...v1.3.1) (2022-06-30)
+
+
+### Bug Fixes
+
+* **css:** 🐛 build not putting css in correct folder ([8e2a764](https://github.com/philstenning/react-resizable-collapsible-grid/commit/8e2a76436db39c91e4aa46e6ac280be6ddb64a40))
+
 # [1.3.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.2.0...v1.3.0) (2022-06-30)
 
 
