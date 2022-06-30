@@ -27,6 +27,7 @@ type ResizableHorizontalGridProps = {
   collapseRight?: boolean
   initialWidths?: HorizontalGridWidths
   className?: string
+  style?: CSSProperties
 
   // eslint-disable-next-line
   getCurrentState?: ({ gridId, left, right }: HorizontalGridState) => void
@@ -41,6 +42,7 @@ function ResizableHorizontalGrid({
   minWidth = 50,
   gridId = 0,
   className,
+  style,
 }: ResizableHorizontalGridProps) {
   const [panelWidths1, setPanelWidths1] = useState({
     left: initialWidths.left,
@@ -170,6 +172,7 @@ function ResizableHorizontalGrid({
         )} ${leftIsCollapsed ? '' : '2px'} 1fr ${
           rightIsCollapsed ? '' : '2px'
         } ${columnWidthAsString(panelWidths1.right, rightIsCollapsed)}`,
+        ...style,
       } as CSSProperties
     }
     // Two columns
@@ -178,6 +181,7 @@ function ResizableHorizontalGrid({
         panelWidths1.left,
         leftIsCollapsed
       )} ${leftIsCollapsed ? '' : '2px'} 1fr`,
+      ...style,
     } as CSSProperties
   }
 
