@@ -9,6 +9,7 @@ type ResizableVerticalGridProps = {
   collapseTop?: boolean
   collapseBottom?: boolean
   initialHeight?: string | number
+  className?: string
   // eslint-disable-next-line
   getCurrentState?: ({ gridId, height }: VerticalGridState) => void
 }
@@ -33,6 +34,7 @@ function ResizableVerticalGrid({
   collapseTop = false,
   collapseBottom = false,
   gridId = 0,
+  className,
   getCurrentState,
 }: ResizableVerticalGridProps) {
   const [panelHeight, setPanelHeight] = useState(
@@ -145,7 +147,7 @@ function ResizableVerticalGrid({
   return (
     <div
       ref={gridRef}
-      className={styles.container}
+      className={`${styles.container} ${className}`}
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}

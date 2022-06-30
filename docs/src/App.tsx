@@ -60,6 +60,7 @@ function App() {
         gridId={5}
         collapseLeft={isCollapsed.left}
         collapseRight={isCollapsed.right}
+        className="my-h-class"
       >
         <PlaceholderText />
         <ResizableVerticalGrid
@@ -68,6 +69,7 @@ function App() {
           getCurrentState={getGridState}
           collapseTop={isCollapsed.top}
           collapseBottom={isCollapsed.bottom}
+          className="my-v-class"
         >
           <PlaceholderText className="centered">
             <Header />
