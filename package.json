@@ -12,29 +12,27 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "dev": "pnpm -r dev",
-    "clean": "pnpm clean:lib && pnpm clean:docs && rimraf types",
-    "clean:lib": "rimraf dist",
-    "clean:docs": "rimraf docs/dist",
-    "clean:reset": "rimraf docs/node_modules && pnpm clean ",
     "build:all": "pnpm clean && pnpm build:css && pnpm build:rollup && pnpm build:docs",
     "build:css": "postcss  src/index.css --base src --dir dist",
-    "build:lib": "tsc",
     "build:docs": "pnpm --filter docs build",
-    "build:clean": "pnpm clean && pnpm build:css && pnpm build:lib",
+    "build:lib": "pnpm clean && pnpm build:css && pnpm build:rollup",
+    "build:rollup": "rollup -c",
+    "build:ts": "tsc",
+    "dev": "concurrently \"pnpm:watch:css\" \"rollup -c --watch\" \"pnpm --filter docs dev\" ",
+    "docs:publish": "pnpm --filter docs demo",
+    "clean": "pnpm clean:lib && pnpm clean:docs && rimraf types",
+    "clean:docs": "rimraf docs/dist",
+    "clean:lib": "rimraf dist",
     "lint": "eslint src/**/**.ts* --fix ",
     "lint:docs": "pnpm --filter docs lint",
-    "stylelint": "stylelint src/**/*.css --fix",
-    "stylelint:docs": "stylelint docs/src/**/*.css --fix",
-    "watch:css": "postcss  src/index.css --base src --dir dist -w",
-    "watch-ts:": "pnpm tsc -w",
-    "watch": "concurrently \"pnpm:watch:css\" \"rollup -c --watch\" ",
-    "docs:publish": "pnpm --filter docs demo",
     "preview": "pnpm --filter docs preview",
-    "semantic-release": "semantic-release",
     "prepare": "husky install",
-    "build:rollup": "rollup -c",
-    "rollup:w": "rollup -c --watch"
+    "rollup:w": "rollup -c --watch",
+    "semantic-release": "semantic-release",
+    "stylelint:docs": "stylelint docs/src/**/*.css --fix",
+    "stylelint": "stylelint src/**/*.css --fix",
+    "watch:css": "postcss  src/index.css --base src --dir dist -w",
+    "watch:ts:": "pnpm tsc -w"
   },
   "keywords": [
     "react",
@@ -90,7 +88,7 @@
     "typescript": "^4.7.4"
   },
   "peerDependencies": {
-    "react": "17.x || 18.x"
+    "react": "^17.0 || ^18.0"
   },
   "repository": {
     "type": "git",
