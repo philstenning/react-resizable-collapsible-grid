@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.3.1...v1.3.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **library:** add peer dependency range 17.x - 18.x ([4a07647](https://github.com/philstenning/react-resizable-collapsible-grid/commit/4a0764737c39ed3dc7b5c71bdf9ffccde419e1f8))
+
 ## [1.3.1](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.3.0...v1.3.1) (2022-06-30)
 
 
