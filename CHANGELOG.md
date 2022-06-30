@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.2.0...v1.3.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* **css:** 🐛 styles export from package.json correctly ([b9090aa](https://github.com/philstenning/react-resizable-collapsible-grid/commit/b9090aadb3d85dfdf0f913da9229a93fc331cd9f))
+* **library:** 🐛 [#17](https://github.com/philstenning/react-resizable-collapsible-grid/issues/17) added className attributes ([327d098](https://github.com/philstenning/react-resizable-collapsible-grid/commit/327d09818d675f7d86fd242bcaf49c184f6b4dc4))
+
+
+### Features
+
+* **css:** ✨ [#18](https://github.com/philstenning/react-resizable-collapsible-grid/issues/18) add styles as attributes using React.cssProperties ([b7dab35](https://github.com/philstenning/react-resizable-collapsible-grid/commit/b7dab350089e8c26f9927545daf511944ea9c47f))
+
 # [1.2.0](https://github.com/philstenning/react-resizable-collapsible-grid/compare/v1.1.0...v1.2.0) (2022-06-23)
 
 
