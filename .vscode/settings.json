@@ -9,6 +9,6 @@
 
   // you can also add support for autocomplete in other file extensions
   "cssvar.extensions": ["css", "html", "jsx", "tsx", "scss"],
-  "conventionalCommits.scopes": ["docs", "library", "CI", "all"],
+  "conventionalCommits.scopes": ["docs", "library", "CI", "all", "css"],
   "npm.validate.enable": false
 }

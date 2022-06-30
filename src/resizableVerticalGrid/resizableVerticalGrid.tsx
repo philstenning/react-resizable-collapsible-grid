@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, CSSProperties } from 'react'
 import Divider from './resizableVerticalDivider'
 import styles from './resizableVerticalGrid.module.css'
 
@@ -9,6 +9,8 @@ type ResizableVerticalGridProps = {
   collapseTop?: boolean
   collapseBottom?: boolean
   initialHeight?: string | number
+  className?: string
+  style?: CSSProperties
   // eslint-disable-next-line
   getCurrentState?: ({ gridId, height }: VerticalGridState) => void
 }
@@ -33,6 +35,8 @@ function ResizableVerticalGrid({
   collapseTop = false,
   collapseBottom = false,
   gridId = 0,
+  className,
+  style,
   getCurrentState,
 }: ResizableVerticalGridProps) {
   const [panelHeight, setPanelHeight] = useState(
@@ -103,14 +107,15 @@ function ResizableVerticalGrid({
         gridTemplateRows: `calc(${initialHeight}${
           isNumber ? 'px' : ' - 2px'
         } ) 5px 1fr`,
+        ...style,
       }
     }
     // if any are collapsed show single cell
     if (collapseTop || collapseBottom) {
-      return { gridTemplateRows: `1fr` }
+      return { gridTemplateRows: `1fr`, ...style }
     }
     // split at the stored value.
-    return { gridTemplateRows: `${panelHeight}px 5px 1fr` }
+    return { gridTemplateRows: `${panelHeight}px 5px 1fr`, ...style }
   }
 
   useEffect(() => {
@@ -145,7 +150,7 @@ function ResizableVerticalGrid({
   return (
     <div
       ref={gridRef}
-      className={styles.container}
+      className={`${styles.container} ${className}`}
       style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
